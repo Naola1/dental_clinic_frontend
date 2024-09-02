@@ -15,9 +15,14 @@ import { Form } from "../ui/form";
 import { InputForm } from "../input-form/input";
 import Loading from "../loading/Loading";
 import { useRegister } from "@/hooks/use-auth";
+import { useEffect, useState } from "react";
+import { AlertMessage } from "../alert/Alert";
+import { AxiosError } from "axios";
 
 export function RegisterForm() {
   const navigate = useNavigate();
+
+  const [error, setError] = useState(undefined);
 
   const register = useRegister();
 
@@ -32,8 +37,24 @@ export function RegisterForm() {
   });
 
   async function onSubmit(data: z.infer<typeof RegisterSchema>) {
+    setError(undefined);
     await register.mutateAsync(data);
   }
+
+  useEffect(() => {
+    if (register.isError && register.error instanceof AxiosError) {
+      if (register.error.response?.data?.email) {
+        setError(register.error.response?.data?.email);
+      }
+      if (register.error.response?.data?.username) {
+        setError(register.error.response?.data?.username);
+      }
+    }
+
+    if (register.isSuccess) {
+      navigate("/login");
+    }
+  }, [register.error, register.data]);
 
   return (
     <div className="flex flex-col items-center justify-center h-screen">
@@ -44,7 +65,7 @@ export function RegisterForm() {
               <CardTitle>Register a new account</CardTitle>
               <CardDescription>Lily dental clinic</CardDescription>
             </CardHeader>
-            <CardContent>
+            <CardContent className="space-y-3">
               <InputForm
                 control={form.control}
                 label={"username"}
@@ -73,6 +94,17 @@ export function RegisterForm() {
                 name={"confirmPassword"}
               />
             </CardContent>
+
+            {error && (
+              <div className="px-6">
+                <AlertMessage
+                  message={error ?? ""}
+                  variant={"destructive"}
+                  header={"Error"}
+                />
+              </div>
+            )}
+
             <div className="flex flex-col justify-end px-6 py-3">
               <Button
                 disabled={register.isPending}

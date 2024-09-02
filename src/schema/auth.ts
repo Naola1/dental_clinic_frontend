@@ -9,19 +9,24 @@ export const LoginSchema = z.object({
   }),
 });
 
-export const RegisterSchema = z.object({
-  email: z.string({
-    required_error: "Email is required",
-  }),
-  username: z.string({
-    required_error: "Username is required",
-  }),
+export const RegisterSchema = z
+  .object({
+    email: z.string({
+      required_error: "Email is required",
+    }),
+    username: z.string({
+      required_error: "Username is required",
+    }),
 
-  password: z.string({
-    required_error: "Password is required",
-  }),
+    password: z.string().min(6, {
+      message: "Password must be greater that 6 characters",
+    }),
 
-  confirmPassword: z.string({
-    required_error: "Confirm password is required",
-  }),
-});
+    confirmPassword: z.string().min(6, {
+      message: "Confirm password must be greater that 6 characters",
+    }),
+  })
+  .refine((data) => data.password === data.confirmPassword, {
+    message: "Password must match",
+    path: ["confirmPassword"],
+  });

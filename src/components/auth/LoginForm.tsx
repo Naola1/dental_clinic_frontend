@@ -16,6 +16,7 @@ import { Form } from "../ui/form";
 import { InputForm } from "../input-form/input";
 import { useLogin } from "@/hooks/use-auth";
 import Loading from "../loading/Loading";
+import { useEffect } from "react";
 
 export function LoginForm() {
   const navigate = useNavigate();
@@ -33,6 +34,20 @@ export function LoginForm() {
   async function onSubmit(data: z.infer<typeof LoginSchema>) {
     await login.mutateAsync(data);
   }
+
+  useEffect(() => {
+    if (login.data?.role === "patient") {
+      navigate("/patient/dashboard");
+    }
+
+    if (login.data?.role === "doctor") {
+      navigate("/doctor/dashboard");
+    }
+
+    if (login.data?.role === "recepionist") {
+      navigate("/recepionist/dashboard");
+    }
+  }, [login.data]);
 
   return (
     <div className="flex flex-col items-center justify-center h-screen">

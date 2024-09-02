@@ -1,12 +1,12 @@
 import { login, register } from "@/api/auth";
 import { useMutation } from "@tanstack/react-query";
-import { ILogin, IRegister } from "types/auth";
+import { toast } from "./use-toast";
 
 export const useLogin = () => {
   return useMutation({
     mutationFn: login,
-    onSuccess: (user: ILogin) => {
-      console.log(user);
+    onSuccess: (user) => {
+      localStorage.setItem("token", user.access_token);
     },
   });
 };
@@ -14,8 +14,11 @@ export const useLogin = () => {
 export const useRegister = () => {
   return useMutation({
     mutationFn: register,
-    onSuccess: (user: IRegister) => {
-      console.log(user);
+    onSuccess: () => {
+      toast({
+        variant: "default",
+        title: "Registration Successful",
+      });
     },
   });
 };
