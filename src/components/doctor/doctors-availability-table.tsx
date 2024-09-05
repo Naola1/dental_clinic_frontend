@@ -13,16 +13,8 @@ import {
   getSortedRowModel,
   useReactTable,
 } from "@tanstack/react-table";
-import { ArrowUpDown, ChevronDown } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
-import {
-  DropdownMenu,
-  DropdownMenuCheckboxItem,
-  DropdownMenuContent,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
-import { Input } from "@/components/ui/input";
 import {
   Table,
   TableBody,
@@ -50,17 +42,7 @@ export const columns: ColumnDef<DoctorAvailability>[] = [
   },
   {
     accessorKey: "speciality",
-    header: ({ column }) => {
-      return (
-        <Button
-          variant="ghost"
-          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
-        >
-          Speciality
-          <ArrowUpDown className="ml-2 h-4 w-4" />
-        </Button>
-      );
-    },
+    header: "Speciality",
     cell: ({ row }) => (
       <div className="lowercase">{row.getValue("speciality")}</div>
     ),
@@ -71,10 +53,11 @@ export const columns: ColumnDef<DoctorAvailability>[] = [
     header: "Actions",
     cell: ({ row }) => {
       const book = row.original;
+      const doctorName = book.name;
 
       return (
         <DialogComponent btnName={"Book now"} title={"Book now"}>
-          <BookingForm id={book.id} />
+          <BookingForm id={book.id} doctorName={doctorName} />
         </DialogComponent>
       );
     },

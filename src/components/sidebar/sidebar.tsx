@@ -1,3 +1,4 @@
+import useAuthStore from "@/hooks/zustand/use-auth-store";
 import { Button } from "../ui/button";
 
 import { Outlet, useLocation, useNavigate } from "react-router-dom";
@@ -14,6 +15,8 @@ export function Sidebar({ items }: SidebarProps) {
   const splitedPath = urlPath.split("/");
 
   const currentPath = splitedPath[splitedPath.length - 1];
+
+  const authStore = useAuthStore();
 
   return (
     <div className="pb-12 flex w-screen">
@@ -41,7 +44,7 @@ export function Sidebar({ items }: SidebarProps) {
             <Button
               className="absolute bottom-[20%] left-4"
               onClick={() => {
-                localStorage.clear();
+                authStore.logout();
                 navigate("/login");
               }}
             >

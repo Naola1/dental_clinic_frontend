@@ -1,7 +1,7 @@
-import axios from "./axios";
+import axiosInstance from "./axios";
 import { IPatientTreatment } from "../../types/treatment";
 
 export const getPatientTreatment = async (): Promise<IPatientTreatment> => {
-  const response = await axios.get("/patient/history/");
+  const response = await axiosInstance.get("/patient/history/");
   return response.data;
 };

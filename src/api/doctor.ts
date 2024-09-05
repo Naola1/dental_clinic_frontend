@@ -5,15 +5,15 @@ import {
   IDoctorsAvailablitySingle,
   ISingleDoctor,
 } from "../../types/doctor";
-import axios from "./axios";
+import axiosInstance from "./axios";
 
 export const getAllDoctors = async (): Promise<IDoctorResponse> => {
-  const response = await axios.get("/doctors");
+  const response = await axiosInstance.get("/doctors");
   return response.data;
 };
 
 export const getSingleDoctor = async (id: number): Promise<ISingleDoctor> => {
-  const response = await axios.get(`/doctors/${id}`);
+  const response = await axiosInstance.get(`/doctors/${id}`);
   return response.data;
 };
 
@@ -21,15 +21,18 @@ export const booking = async ({
   id,
   data,
 }: BookingProps): Promise<IBookingResponse> => {
-  const response = await axios.post(`/bookings/${id}/book_appointment`, {
-    data,
-  });
+  const response = await axiosInstance.post(
+    `/bookings/${id}/book_appointment/`,
+    {
+      appointment_date: data.appointment_date,
+    }
+  );
   return response.data;
 };
 
 export const getSingleDoctorAvailablity = async (
   id: number
-): Promise<IDoctorsAvailablitySingle> => {
-  const response = await axios.get(`/availabilities/${id}`);
+): Promise<IDoctorsAvailablitySingle[]> => {
+  const response = await axiosInstance.get(`/doctors/${id}/availability`);
   return response.data;
 };

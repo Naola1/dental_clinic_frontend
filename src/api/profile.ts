@@ -1,7 +1,7 @@
 import { IPatientProfile } from "types/profile";
-import axios from "./axios";
+import axiosInstance from "./axios";
 
 export const getPatientProfile = async (): Promise<IPatientProfile> => {
-  const response = await axios.get("/user/profile/");
+  const response = await axiosInstance.get("/user/profile/");
   return response.data;
 };

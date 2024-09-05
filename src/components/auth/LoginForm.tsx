@@ -42,7 +42,6 @@ export function LoginForm() {
   useEffect(() => {
     if (login.isError && login.error instanceof AxiosError) {
       if (login.error.response?.data?.error) {
-        console.log({ errrorrrrrr: login.error.response?.data?.error });
         setError(login.error.response?.data?.error);
       }
     }
