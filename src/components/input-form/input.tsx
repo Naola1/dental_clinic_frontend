@@ -15,6 +15,7 @@ interface InputFormProps<TFormValues extends FieldValues> {
   label: string;
   placeholder: string;
   name: Path<TFormValues>;
+  type?: React.HTMLInputTypeAttribute | undefined;
 }
 
 export const InputForm = <TFormValues extends FieldValues>({
@@ -22,6 +23,7 @@ export const InputForm = <TFormValues extends FieldValues>({
   label,
   placeholder,
   name,
+  type,
 }: InputFormProps<TFormValues>) => {
   return (
     <FormField
@@ -31,7 +33,7 @@ export const InputForm = <TFormValues extends FieldValues>({
         <FormItem>
           <FormLabel htmlFor={name}>{label}</FormLabel>
           <FormControl>
-            <Input placeholder={placeholder} {...field} />
+            <Input placeholder={placeholder} {...field} type={type} />
           </FormControl>
           <FormMessage />
         </FormItem>

@@ -16,10 +16,13 @@ import { Form } from "../ui/form";
 import { InputForm } from "../input-form/input";
 import { useLogin } from "@/hooks/use-auth";
 import Loading from "../loading/Loading";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import { AxiosError } from "axios";
+import { AlertMessage } from "../alert/Alert";
 
 export function LoginForm() {
   const navigate = useNavigate();
+  const [error, setError] = useState(undefined);
 
   const form = useForm<z.infer<typeof LoginSchema>>({
     resolver: zodResolver(LoginSchema),
@@ -32,10 +35,18 @@ export function LoginForm() {
   const login = useLogin();
 
   async function onSubmit(data: z.infer<typeof LoginSchema>) {
+    setError(undefined);
     await login.mutateAsync(data);
   }
 
   useEffect(() => {
+    if (login.isError && login.error instanceof AxiosError) {
+      if (login.error.response?.data?.error) {
+        console.log({ errrorrrrrr: login.error.response?.data?.error });
+        setError(login.error.response?.data?.error);
+      }
+    }
+
     if (login.data?.role === "patient") {
       navigate("/patient/dashboard");
     }
@@ -47,7 +58,7 @@ export function LoginForm() {
     if (login.data?.role === "recepionist") {
       navigate("/recepionist/dashboard");
     }
-  }, [login.data]);
+  }, [login.error, login.data]);
 
   return (
     <div className="flex flex-col items-center justify-center h-screen">
@@ -73,6 +84,17 @@ export function LoginForm() {
                 name={"password"}
               />
             </CardContent>
+
+            {error && (
+              <div className="px-6">
+                <AlertMessage
+                  message={error ?? ""}
+                  variant={"destructive"}
+                  header={"Error"}
+                />
+              </div>
+            )}
+
             <div className="flex flex-col justify-end px-6 py-3">
               <Button disabled={login.isPending} className="flex items-center">
                 {login.isPending ? <Loading /> : "Login"}

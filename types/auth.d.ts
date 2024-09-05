@@ -16,3 +16,7 @@ export interface LoginResponse {
   role: string;
   access_token: string;
 }
+export interface SidebarItem {
+  title: string;
+  href: string;
+}
