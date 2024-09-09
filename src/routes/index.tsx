@@ -6,6 +6,7 @@ import DoctorDashboard from "@/pages/doctor/dashboard";
 import DoctorDoctors from "@/pages/doctor/doctors";
 import DoctorPatient from "@/pages/doctor/patient";
 import DoctorProfile from "@/pages/doctor/profile";
+import LandingPage from "@/pages/landing/Landing";
 import PatientAppointment from "@/pages/patient/appointment";
 import PatientDashboard from "@/pages/patient/dashboard";
 import DoctorsAvailablity from "@/pages/patient/doctors-availablity";
@@ -18,6 +19,10 @@ import { DoctorSidebar, PatientSidebar } from "@/utils/constants";
 import { createBrowserRouter } from "react-router-dom";
 
 export const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <LandingPage />,
+  },
   {
     path: "/login",
     element: <LoginScreen />,
