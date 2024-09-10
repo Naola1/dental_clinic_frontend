@@ -1,7 +1,12 @@
 export interface IPatientProfile {
   user: User;
-  medical_history: string;
-  allergies: string;
+  medical_history?: string;
+  allergies?: string;
+  specialization?: string;
+  bio?: string;
+  profile_picture?: string;
+  experience?: string;
+  qualification?: string;
 }
 
 interface User {

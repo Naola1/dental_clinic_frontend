@@ -7,3 +7,10 @@ export const usePADashboard = () => {
     queryFn: getPatientDashboardAppointment,
   });
 };
+
+export const useDADashboard = () => {
+  return useQuery({
+    queryKey: ["DADashboard"],
+    queryFn: getPatientDashboardAppointment,
+  });
+};

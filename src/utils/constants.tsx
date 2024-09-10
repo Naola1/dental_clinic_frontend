@@ -33,8 +33,8 @@ export const DoctorSidebar: SidebarItem[] = [
     href: "/doctor/doctors",
   },
   {
-    title: "Patient",
-    href: "/doctor/patient",
+    title: "Patient-Records",
+    href: "/doctor/patient-records",
   },
   {
     title: "Appointment",
