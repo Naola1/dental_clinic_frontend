@@ -14,7 +14,7 @@ const LandingPage = () => {
         <header className="px-4 lg:px-6 h-20 flex items-center">
           <Link className="flex items-center justify-center" href="#">
             <img src={Logo} height={180} width={180} className="object-cover" />
-            <span className="sr-only">Lily Dental Clinic</span>
+            <span className="sr-only">Dental Clinic</span>
           </Link>
           <nav className="ml-auto flex gap-4 sm:gap-6">
             <button
@@ -47,7 +47,7 @@ const LandingPage = () => {
           <div className="flex flex-col  items-center space-y-4 text-center">
             <div className="space-y-2">
               <h1 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl lg:text-6xl/none py-3 0">
-                Welcome to Lily Dental Clinic
+                Dental Management System
               </h1>
               <p className="mx-auto max-w-[700px] text-gray-500 md:text-xl dark:text-gray-400">
                 Your journey to a healthier, brighter smile starts here. Expert
@@ -65,64 +65,6 @@ const LandingPage = () => {
       </section>
 
       <main className="flex-1 justify-center items-center w-full">
-        <section
-          id="services"
-          className="w-full mx-auto py-12 md:py-24 lg:py-32 bg-white"
-        >
-          <div className=" px-4 md:px-6">
-            <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl text-center mb-12">
-              Our Services
-            </h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {[
-                {
-                  title: "General Dentistry",
-                  description: "Comprehensive dental care for all ages",
-                  icon: ToothIcon,
-                },
-                {
-                  title: "Cosmetic Dentistry",
-                  description:
-                    "Enhance your smile with our cosmetic treatments",
-                  icon: SparklesIcon,
-                },
-                {
-                  title: "Orthodontics",
-                  description: "Straighten your teeth for a perfect smile",
-                  icon: BraceIcon,
-                },
-                {
-                  title: "Oral Surgery",
-                  description:
-                    "Expert surgical procedures for complex dental issues",
-                  icon: ScalpelIcon,
-                },
-                {
-                  title: "Pediatric Dentistry",
-                  description: "Specialized care for children's dental health",
-                  icon: BabyIcon,
-                },
-                {
-                  title: "Periodontics",
-                  description:
-                    "Gum care and treatments for periodontal diseases",
-                  icon: GumIcon,
-                },
-              ].map((service, index) => (
-                <Card key={index}>
-                  <CardContent className="flex flex-col items-center space-y-4 p-6 hover:shadow-md duration-150 ">
-                    <service.icon className="h-12 w-12 text-blue-500" />
-                    <h3 className="text-xl font-bold">{service.title}</h3>
-                    <p className="text-center text-gray-500">
-                      {service.description}
-                    </p>
-                  </CardContent>
-                </Card>
-              ))}
-            </div>
-          </div>
-        </section>
-
         <section>
           <AnimatedFeatures />
         </section>
@@ -152,7 +94,7 @@ const LandingPage = () => {
                   development skills to create a real-world solution for
                   clinics.
                 </p>
-                <ul className="grid gap-6 md:grid-cols-2">
+                {/* <ul className="grid gap-6 md:grid-cols-2">
                   <li className="flex items-center space-x-2">
                     <CheckCircleIcon className="h-5 w-5 text-green-500" />
                     <span>State-of-the-art equipment</span>
@@ -169,7 +111,7 @@ const LandingPage = () => {
                     <CheckCircleIcon className="h-5 w-5 text-green-500" />
                     <span>Personalized care plans</span>
                   </li>
-                </ul>
+                </ul> */}
               </div>
             </div>
           </div>
