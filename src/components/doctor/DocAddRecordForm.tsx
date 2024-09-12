@@ -2,7 +2,6 @@ import { AlertMessage } from "@/components/alert/Alert";
 import { InputForm } from "@/components/input-form/input";
 import Loading from "@/components/loading/Loading";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
 import { Form } from "@/components/ui/form";
 import { useDocAddRecord } from "@/hooks/use-auth";
 import { DocAddRecord } from "@/schema/auth";
