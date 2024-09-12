@@ -62,12 +62,12 @@ const LandingPage = () => {
         </div>
       </section>
 
-      <main className="flex-1">
+      <main className="flex-1 justify-center items-center w-full">
         <section
           id="services"
-          className="w-full py-12 md:py-24 lg:py-32 bg-white"
+          className="w-full mx-auto py-12 md:py-24 lg:py-32 bg-white"
         >
-          <div className="container px-4 md:px-6">
+          <div className=" px-4 md:px-6">
             <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl text-center mb-12">
               Our Services
             </h2>
@@ -124,7 +124,7 @@ const LandingPage = () => {
           id="about"
           className="w-full py-12 md:py-24 lg:py-32 bg-gray-100"
         >
-          <div className="container px-4 md:px-6">
+          <div className=" px-4 md:px-6">
             <div className="grid items-center gap-6 lg:grid-cols-2 lg:gap-12 xl:grid-cols-2">
               <img
                 alt="Dental clinic interior"
@@ -167,7 +167,7 @@ const LandingPage = () => {
           </div>
         </section>
         <section className="w-full py-12 md:py-24 lg:py-32 bg-white">
-          <div className="container px-4 md:px-6">
+          <div className=" px-4 md:px-6">
             <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl text-center mb-12">
               What Our Patients Say
             </h2>
@@ -206,7 +206,7 @@ const LandingPage = () => {
           id="contact"
           className="w-full py-12 md:py-24 lg:py-32 bg-gray-100"
         >
-          <div className="container px-4 md:px-6">
+          <div className=" px-4 md:px-6">
             <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl text-center mb-12">
               Contact Us
             </h2>
