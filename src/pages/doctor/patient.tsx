@@ -1,4 +1,3 @@
-import { DialogComponent } from "@/components/dialog";
 import { DoctorTreatmentTable } from "@/components/doctor/doctor-treatment-table";
 
 const DoctorPatient = () => {

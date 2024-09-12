@@ -1,5 +1,3 @@
-"use client";
-
 import * as React from "react";
 import {
   ColumnDef,
@@ -25,7 +23,7 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import Loading from "../loading/Loading";
-import { useDoctorTreatment, useTreatment } from "@/hooks/use-treatment";
+import { useDoctorTreatment } from "@/hooks/use-treatment";
 
 export type DoctorAvailability = {
   id: number;
