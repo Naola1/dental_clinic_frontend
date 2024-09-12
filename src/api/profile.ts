@@ -7,6 +7,7 @@ import {
   DocUpdateProfileSchema,
   UpdateProfileSchema,
 } from "@/schema/auth";
+import moment from "moment";
 
 export const getPatientProfile = async (): Promise<IPatientProfile> => {
   const response = await axiosInstance.get("/user/profile/");
@@ -16,7 +17,13 @@ export const getPatientProfile = async (): Promise<IPatientProfile> => {
 export const profileUpdate = async (
   data: z.infer<typeof UpdateProfileSchema>
 ): Promise<IProfileUpdate> => {
-  const response = await axiosInstance.put("/user/profile/", data);
+  const response = await axiosInstance.put("/user/profile/", {
+    ...data,
+    user: {
+      ...data.user,
+      date_of_birth: moment(data.user?.date_of_birth).format("YYYY-MM-DD"),
+    },
+  });
   return response.data;
 };
 

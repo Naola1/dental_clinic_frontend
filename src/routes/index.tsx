@@ -18,6 +18,7 @@ import PatientTreatment from "@/pages/patient/treatment";
 import ReceptionistAppointment from "@/pages/receptionist/appointment";
 import ReceptionistDashboard from "@/pages/receptionist/dashboard";
 import ReceptionistDoctor from "@/pages/receptionist/doctors";
+import EditProfileReceptionist from "@/pages/receptionist/edit-profile";
 import ReceptionistProfile from "@/pages/receptionist/profile";
 import {
   DoctorSidebar,
@@ -123,6 +124,10 @@ export const router = createBrowserRouter([
       {
         path: "/receptionist/profile",
         element: <ReceptionistProfile />,
+      },
+      {
+        path: "/receptionist/edit-profile",
+        element: <EditProfileReceptionist />,
       },
     ],
   },

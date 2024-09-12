@@ -137,7 +137,7 @@ const EditProfileDoctor = () => {
 
                 <InputForm
                   control={form.control}
-                  label={"Emergency XContact Name"}
+                  label={"Emergency Contact Name"}
                   placeholder={"Enter your emergency contact name"}
                   name={"user.emergency_contact_name"}
                 />

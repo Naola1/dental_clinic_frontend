@@ -13,7 +13,7 @@ import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { z } from "zod";
 
-const EditProfilePatient = () => {
+const EditProfileReceptionist = () => {
   const { data, isLoading } = usePatientProfile();
   const navigate = useNavigate();
 
@@ -49,7 +49,7 @@ const EditProfilePatient = () => {
 
   useEffect(() => {
     if (updateProfile.isSuccess) {
-      navigate("/patient/profile");
+      navigate("/receptionist/profile");
     }
   }, [updateProfile.isSuccess]);
 
@@ -117,6 +117,7 @@ const EditProfilePatient = () => {
                   label={"Date of birth"}
                   placeholder={"Enter your date of birth"}
                   name={"user.date_of_birth"}
+                  type="date"
                 />
                 <InputForm
                   control={form.control}
@@ -146,19 +147,6 @@ const EditProfilePatient = () => {
                 placeholder={"Enter your emerygency contact number"}
                 name={"user.emergency_contact_number"}
               />
-              <InputForm
-                control={form.control}
-                label={"Medical history"}
-                placeholder={"Enter your medical history"}
-                name={"medical_history"}
-              />
-
-              <InputForm
-                control={form.control}
-                label={"Allergies"}
-                placeholder={"Enter your allergies"}
-                name={"allergies"}
-              />
             </CardContent>
 
             {error && (
@@ -186,4 +174,4 @@ const EditProfilePatient = () => {
   );
 };
 
-export default EditProfilePatient;
+export default EditProfileReceptionist;
