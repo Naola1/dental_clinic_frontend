@@ -26,10 +26,12 @@ import {
 } from "@/components/ui/table";
 import Loading from "../loading/Loading";
 import { useDADashboard } from "@/hooks/use-patient";
+import moment from "moment";
 
 export type DoctorAvailability = {
   id: number;
   patient: number;
+  doctor: string;
   appointment_date: string;
   status: string;
 };
@@ -43,10 +45,19 @@ export const columns: ColumnDef<DoctorAvailability>[] = [
     ),
   },
   {
+    accessorKey: "doctor",
+    header: "Doctor",
+    cell: ({ row }) => (
+      <div className="capitalize">{row.getValue("doctor")}</div>
+    ),
+  },
+  {
     accessorKey: "appointment_date",
     header: "Appointment Date",
     cell: ({ row }) => (
-      <div className="capitalize">{row.getValue("appointment_date")}</div>
+      <div className="capitalize">
+        {moment(row.getValue("appointment_date")).format("DD/MM/YYYY")}
+      </div>
     ),
   },
   {
@@ -76,6 +87,7 @@ export function DoctorAppointmentTable() {
         patient: doc.patient,
         appointment_date: doc.appointment_date,
         status: doc.status,
+        doctor: doc.doctor.user.first_name + " " + doc.doctor.user.last_name,
       };
     }) ?? [];
 

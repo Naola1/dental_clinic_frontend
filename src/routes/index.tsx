@@ -14,8 +14,14 @@ import PatientNotification from "@/pages/patient/notification";
 import PatientProfile from "@/pages/patient/profile";
 import PatientTreatment from "@/pages/patient/treatment";
 import ReceptionistAppointment from "@/pages/receptionist/appointment";
+import ReceptionistDashboard from "@/pages/receptionist/dashboard";
+import ReceptionistDoctor from "@/pages/receptionist/doctors";
 import ReceptionistProfile from "@/pages/receptionist/profile";
-import { DoctorSidebar, PatientSidebar } from "@/utils/constants";
+import {
+  DoctorSidebar,
+  PatientSidebar,
+  ReceptionistSidebar,
+} from "@/utils/constants";
 import { createBrowserRouter } from "react-router-dom";
 
 export const router = createBrowserRouter([
@@ -90,10 +96,15 @@ export const router = createBrowserRouter([
   },
   {
     path: "/receptionist",
+    element: <Sidebar items={ReceptionistSidebar} />,
     children: [
       {
         path: "/receptionist/dashboard",
-        element: <PatientDashboard />,
+        element: <ReceptionistDashboard />,
+      },
+      {
+        path: "/receptionist/doctors",
+        element: <ReceptionistDoctor />,
       },
       {
         path: "/receptionist/appointment",

@@ -45,3 +45,23 @@ export const DoctorSidebar: SidebarItem[] = [
     href: "/doctor/profile",
   },
 ];
+
+export const ReceptionistSidebar: SidebarItem[] = [
+  {
+    title: "Dashboard",
+    href: "/receptionist/dashboard",
+  },
+  {
+    title: "Doctors",
+    href: "/receptionist/doctors",
+  },
+
+  {
+    title: "Appointment",
+    href: "/receptionist/appointment",
+  },
+  {
+    title: "Profile",
+    href: "/receptionist/profile",
+  },
+];

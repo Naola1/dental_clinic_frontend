@@ -54,8 +54,8 @@ export function LoginForm() {
       navigate("/doctor/dashboard");
     }
 
-    if (login.data?.role === "recepionist") {
-      navigate("/recepionist/dashboard");
+    if (login.data?.role === "receptionist") {
+      navigate("/receptionist/dashboard");
     }
   }, [login.error, login.data]);
 
