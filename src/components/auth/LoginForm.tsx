@@ -81,6 +81,7 @@ export function LoginForm() {
                 label={"Password"}
                 placeholder={"Enter your password"}
                 name={"password"}
+                type="password"
               />
             </CardContent>
 

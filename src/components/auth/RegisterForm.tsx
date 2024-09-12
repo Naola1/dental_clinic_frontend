@@ -85,6 +85,7 @@ export function RegisterForm() {
                 label={"Password"}
                 placeholder={"Enter your password"}
                 name={"password"}
+                type="password"
               />
 
               <InputForm
@@ -92,6 +93,7 @@ export function RegisterForm() {
                 label={"Confirm password"}
                 placeholder={"Enter your confirm password"}
                 name={"confirmPassword"}
+                type="password"
               />
             </CardContent>
 
