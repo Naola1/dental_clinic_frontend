@@ -28,7 +28,7 @@ import moment from "moment";
 
 export type DoctorAvailability = {
   id: number;
-  patient: number;
+  patient: string;
   doctor: string;
   appointment_date: string;
   status: string;
@@ -82,7 +82,7 @@ export function DoctorAppointmentTable() {
     doctors?.results.map((doc) => {
       return {
         id: doc.id,
-        patient: doc.patient,
+        patient: doc.patient.user.first_name + " " + doc.patient.user.last_name,
         appointment_date: doc.appointment_date,
         status: doc.status,
         doctor: doc.doctor.user.first_name + " " + doc.doctor.user.last_name,
@@ -174,7 +174,7 @@ export function DoctorAppointmentTable() {
           </TableBody>
         </Table>
       </div>
-      <div className="flex items-center justify-end space-x-2 py-4">
+      {/* <div className="flex items-center justify-end space-x-2 py-4">
         <div className="flex-1 text-sm text-muted-foreground">
           {table.getFilteredSelectedRowModel().rows.length} of{" "}
           {table.getFilteredRowModel().rows.length} row(s) selected.
@@ -197,7 +197,7 @@ export function DoctorAppointmentTable() {
             Next
           </Button>
         </div>
-      </div>
+      </div> */}
     </div>
   );
 }

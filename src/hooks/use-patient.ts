@@ -1,4 +1,7 @@
-import { getPatientDashboardAppointment } from "@/api/patient";
+import {
+  getDoctorDashboardAppointment,
+  getPatientDashboardAppointment,
+} from "@/api/patient";
 import { useQuery } from "@tanstack/react-query";
 
 export const usePADashboard = () => {
@@ -11,6 +14,6 @@ export const usePADashboard = () => {
 export const useDADashboard = () => {
   return useQuery({
     queryKey: ["DADashboard"],
-    queryFn: getPatientDashboardAppointment,
+    queryFn: () => getDoctorDashboardAppointment({ page_size: "3" }),
   });
 };

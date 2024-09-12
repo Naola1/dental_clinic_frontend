@@ -6,7 +6,7 @@ const DoctorDashboard = () => {
   return (
     <div>
       <DashboardHeader name={"Dr. Naol"} />
-      <h1 className="py-4 text-xl font-bold px-6">Doctor Appointment</h1>
+      <h1 className="py-4 text-xl font-bold px-6">Your Appointment</h1>
 
       <DoctorAppointmentTable />
 
