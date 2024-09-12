@@ -30,3 +30,23 @@ export const RegisterSchema = z
     message: "Password must match",
     path: ["confirmPassword"],
   });
+
+const UserSchema = z.object({
+  username: z.string().optional(),
+  email: z.string().optional(),
+  first_name: z.string().optional(),
+  middle_name: z.string().optional(),
+  last_name: z.string().optional(),
+  gender: z.string().optional(),
+  date_of_birth: z.string().optional().nullable(),
+  phone_number: z.string().optional(),
+  address: z.string().optional(),
+  emergency_contact_name: z.string().optional(),
+  emergency_contact_number: z.string().optional(),
+});
+
+export const UpdateProfileSchema = z.object({
+  user: UserSchema.optional(),
+  medical_history: z.string().optional(),
+  allergies: z.string().optional(),
+});

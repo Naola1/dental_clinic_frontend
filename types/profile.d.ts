@@ -16,7 +16,7 @@ interface User {
   middle_name: string;
   last_name: string;
   gender: string;
-  date_of_birth: null;
+  date_of_birth?: strng;
   phone_number: string;
   address: string;
   emergency_contact_name: string;

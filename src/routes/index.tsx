@@ -10,6 +10,7 @@ import LandingPage from "@/pages/landing/Landing";
 import PatientAppointment from "@/pages/patient/appointment";
 import PatientDashboard from "@/pages/patient/dashboard";
 import DoctorsAvailablity from "@/pages/patient/doctors-availablity";
+import EditProfilePatient from "@/pages/patient/edit-profile";
 import PatientNotification from "@/pages/patient/notification";
 import PatientProfile from "@/pages/patient/profile";
 import PatientTreatment from "@/pages/patient/treatment";
@@ -64,6 +65,10 @@ export const router = createBrowserRouter([
       {
         path: "/patient/notification",
         element: <PatientNotification />,
+      },
+      {
+        path: "/patient/edit-profile",
+        element: <EditProfilePatient />,
       },
     ],
   },
