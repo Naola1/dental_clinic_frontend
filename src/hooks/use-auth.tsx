@@ -2,7 +2,11 @@ import { login, register } from "@/api/auth";
 import { useMutation } from "@tanstack/react-query";
 import { toast } from "./use-toast";
 import useAuthStore from "./zustand/use-auth-store";
-import { profileUpdate } from "@/api/profile";
+import {
+  docAddRecrord,
+  profileUpdate,
+  profileUpdateDoctor,
+} from "@/api/profile";
 
 export const useLogin = () => {
   const authStore = useAuthStore();
@@ -33,6 +37,29 @@ export const useUpdateProfile = () => {
       toast({
         variant: "default",
         title: "Profile update Successful",
+      });
+    },
+  });
+};
+export const useUpdateProfileDoctor = () => {
+  return useMutation({
+    mutationFn: profileUpdateDoctor,
+    onSuccess: () => {
+      toast({
+        variant: "default",
+        title: "Profile update Successful",
+      });
+    },
+  });
+};
+
+export const useDocAddRecord = () => {
+  return useMutation({
+    mutationFn: docAddRecrord,
+    onSuccess: () => {
+      toast({
+        variant: "default",
+        title: "Record added Successful",
       });
     },
   });

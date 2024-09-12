@@ -11,9 +11,10 @@ export const usePADashboard = () => {
   });
 };
 
-export const useDADashboard = () => {
+export const useDADashboard = (page_size?: string) => {
   return useQuery({
-    queryKey: ["DADashboard"],
-    queryFn: () => getDoctorDashboardAppointment({ page_size: "3" }),
+    queryKey: ["DADashboard", page_size],
+    queryFn: () =>
+      getDoctorDashboardAppointment({ page_size: page_size ?? "3" }),
   });
 };

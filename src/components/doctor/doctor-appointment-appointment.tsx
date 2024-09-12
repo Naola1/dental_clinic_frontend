@@ -23,45 +23,74 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import Loading from "../loading/Loading";
-import { useDoctorTreatment } from "@/hooks/use-treatment";
+import { useDADashboard } from "@/hooks/use-patient";
+import moment from "moment";
+import { Edit } from "lucide-react";
+import { DialogComponent } from "../dialog";
+import DocAddRecordForm from "./DocAddRecordForm";
 
 export type DoctorAvailability = {
   id: number;
-  date: string;
-  treatment: string;
-  description: string;
+  patient: string;
+  doctor: string;
+  appointment_date: string;
+  status: string;
+  patientId: number;
 };
 
 export const columns: ColumnDef<DoctorAvailability>[] = [
   {
-    accessorKey: "date",
-    header: "Date",
-    cell: ({ row }) => <div className="capitalize">{row.getValue("date")}</div>,
+    accessorKey: "patient",
+    header: "Patient",
+    cell: ({ row }) => (
+      <div className="capitalize">{row.getValue("patient")}</div>
+    ),
   },
   {
     accessorKey: "doctor",
-    header: "Patient Name",
+    header: "Doctor",
     cell: ({ row }) => (
       <div className="capitalize">{row.getValue("doctor")}</div>
     ),
   },
   {
-    accessorKey: "treatment",
-    header: "Treatment",
+    accessorKey: "appointment_date",
+    header: "Appointment Date",
     cell: ({ row }) => (
-      <div className="capitalize">{row.getValue("treatment")}</div>
+      <div className="capitalize">
+        {moment(row.getValue("appointment_date")).format("DD/MM/YYYY")}
+      </div>
     ),
   },
   {
-    accessorKey: "description",
-    header: "Description",
+    accessorKey: "status",
+    header: "Status",
     cell: ({ row }) => (
-      <div className="capitalize">{row.getValue("description")}</div>
+      <div className="capitalize">{row.getValue("status")}</div>
     ),
+  },
+  {
+    header: "Actions",
+    cell: ({ row }) => {
+      const data = row.original;
+      return (
+        <DialogComponent
+          iconButton={<Edit />}
+          title={"Add Record"}
+          children={<DocAddRecordForm patient={data.patientId} />}
+        />
+      );
+    },
   },
 ];
 
-export function DoctorTreatmentTable() {
+interface DoctorAppointmentAppointmentTableProps {
+  page_size?: string;
+}
+
+export function DoctorAppointmentAppointmentTable({
+  page_size,
+}: DoctorAppointmentAppointmentTableProps) {
   const [sorting, setSorting] = React.useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
     []
@@ -70,16 +99,17 @@ export function DoctorTreatmentTable() {
     React.useState<VisibilityState>({});
   const [rowSelection, setRowSelection] = React.useState({});
 
-  const { data: doctors, isPending } = useDoctorTreatment();
+  const { data: doctors, isPending } = useDADashboard(page_size);
 
   const data: DoctorAvailability[] =
     doctors?.results.map((doc) => {
       return {
         id: doc.id,
-        date: doc.treatment_date,
-        doctor: doc.patient.first_name + " " + doc.patient.last_name,
-        treatment: doc.treatment.name,
-        description: doc.description,
+        patient: doc.patient.user.first_name + " " + doc.patient.user.last_name,
+        appointment_date: doc.appointment_date,
+        status: doc.status,
+        doctor: doc.doctor.user.first_name + " " + doc.doctor.user.last_name,
+        patientId: doc.patient.id,
       };
     }) ?? [];
 
@@ -112,9 +142,7 @@ export function DoctorTreatmentTable() {
 
   if (data.length === 0) {
     return (
-      <p className="text-center">
-        You don&apos;t have any treatment history yet :)
-      </p>
+      <p className="text-center">You don&apos;t have any appointments yet :)</p>
     );
   }
 
@@ -171,10 +199,6 @@ export function DoctorTreatmentTable() {
         </Table>
       </div>
       <div className="flex items-center justify-end space-x-2 py-4">
-        <div className="flex-1 text-sm text-muted-foreground">
-          {table.getFilteredSelectedRowModel().rows.length} of{" "}
-          {table.getFilteredRowModel().rows.length} row(s) selected.
-        </div>
         <div className="space-x-2">
           <Button
             variant="outline"

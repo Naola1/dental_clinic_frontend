@@ -1,9 +1,11 @@
 import Loading from "@/components/loading/Loading";
 import { Button } from "@/components/ui/button";
 import { usePatientProfile } from "@/hooks/use-profile";
+import { useNavigate } from "react-router-dom";
 
 const DoctorProfile = () => {
   const { data, isLoading } = usePatientProfile();
+  const navigate = useNavigate();
 
   if (isLoading) {
     return (
@@ -60,7 +62,12 @@ const DoctorProfile = () => {
           </div>
         </div>
 
-        <Button className="mt-6">Edit profile</Button>
+        <Button
+          className="mt-6"
+          onClick={() => navigate("/doctor/edit-profile")}
+        >
+          Edit profile
+        </Button>
       </div>
     </div>
   );

@@ -50,3 +50,32 @@ export const UpdateProfileSchema = z.object({
   medical_history: z.string().optional(),
   allergies: z.string().optional(),
 });
+
+export const DocAddRecord = z.object({
+  patient: z.coerce.number().optional(),
+  treatment: z.coerce.number().optional(),
+  treatment_date: z.string().optional(),
+  description: z.string().optional(),
+});
+
+const DocUserSchema = z.object({
+  username: z.string().optional(),
+  email: z.string().optional(),
+  first_name: z.string().optional(),
+  middle_name: z.string().optional(),
+  last_name: z.string().optional(),
+  gender: z.string().optional(),
+  date_of_birth: z.string().optional().nullable(),
+  phone_number: z.string().optional(),
+  address: z.string().optional(),
+  emergency_contact_name: z.string().optional(),
+  emergency_contact_number: z.string().optional(),
+});
+
+export const DocUpdateProfileSchema = z.object({
+  user: DocUserSchema.optional(),
+  bio: z.string().optional(),
+  specialization: z.string().optional(),
+  experience: z.coerce.number().optional(),
+  qualification: z.string().optional(),
+});

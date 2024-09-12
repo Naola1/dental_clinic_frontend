@@ -10,20 +10,22 @@ import {
 import { ReactNode } from "react";
 
 interface DialogComponenetProps {
-  btnName: string;
+  btnName?: string;
   title: string;
   children: ReactNode;
+  iconButton?: ReactNode;
 }
 
 export function DialogComponent({
   btnName,
   title,
   children,
+  iconButton,
 }: DialogComponenetProps) {
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button variant="outline">{btnName}</Button>
+        {iconButton ?? <Button variant="outline">{btnName}</Button>}
       </DialogTrigger>
       <DialogContent className="sm:max-w-[425px]">
         <DialogHeader>

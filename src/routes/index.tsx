@@ -4,6 +4,7 @@ import RegisterScreen from "@/pages/auth/register";
 import DoctorAppointment from "@/pages/doctor/appointment";
 import DoctorDashboard from "@/pages/doctor/dashboard";
 import DoctorDoctors from "@/pages/doctor/doctors";
+import EditProfileDoctor from "@/pages/doctor/edit-profile";
 import DoctorPatient from "@/pages/doctor/patient";
 import DoctorProfile from "@/pages/doctor/profile";
 import LandingPage from "@/pages/landing/Landing";
@@ -96,6 +97,10 @@ export const router = createBrowserRouter([
       {
         path: "/doctor/doctors",
         element: <DoctorDoctors />,
+      },
+      {
+        path: "/doctor/edit-profile",
+        element: <EditProfileDoctor />,
       },
     ],
   },
