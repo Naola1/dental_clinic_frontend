@@ -24,6 +24,9 @@ import {
 } from "@/components/ui/table";
 import Loading from "../loading/Loading";
 import { useDoctorTreatment } from "@/hooks/use-treatment";
+import { useSearchRecord } from "@/hooks/use-patient";
+import { useDebouncedCallback } from "use-debounce";
+import { Input } from "../ui/input";
 
 export type DoctorAvailability = {
   id: number;
@@ -69,19 +72,42 @@ export function DoctorTreatmentTable() {
   const [columnVisibility, setColumnVisibility] =
     React.useState<VisibilityState>({});
   const [rowSelection, setRowSelection] = React.useState({});
+  const [searchItem, setSearchItem] = React.useState("");
 
   const { data: doctors, isPending } = useDoctorTreatment();
 
+  const { data: searchData, isPending: searchPendig } =
+    useSearchRecord(searchItem);
+
+  const handleInputChange = useDebouncedCallback(
+    (e: React.ChangeEvent<HTMLInputElement>) => {
+      console.log("asd");
+      const searchTerm = e.target.value;
+      setSearchItem(searchTerm);
+    },
+    700
+  );
+
   const data: DoctorAvailability[] =
-    doctors?.results.map((doc) => {
-      return {
-        id: doc.id,
-        date: doc.treatment_date,
-        doctor: doc.patient.first_name + " " + doc.patient.last_name,
-        treatment: doc.treatment.name,
-        description: doc.description,
-      };
-    }) ?? [];
+    searchData && searchData.length > 0
+      ? searchData.map((search) => {
+          return {
+            id: search.id,
+            date: search.treatment_date,
+            doctor: search.patient.first_name + " " + search.patient.last_name,
+            treatment: search.treatment.name,
+            description: search?.description ?? "",
+          };
+        })
+      : doctors?.results.map((doc) => {
+          return {
+            id: doc.id,
+            date: doc.treatment_date,
+            doctor: doc.patient.first_name + " " + doc.patient.last_name,
+            treatment: doc.treatment.name,
+            description: doc.description,
+          };
+        }) ?? [];
 
   const table = useReactTable({
     data,
@@ -120,56 +146,70 @@ export function DoctorTreatmentTable() {
 
   return (
     <div className="w-full px-6">
-      <div className="rounded-md border">
-        <Table>
-          <TableHeader>
-            {table.getHeaderGroups().map((headerGroup) => (
-              <TableRow key={headerGroup.id}>
-                {headerGroup.headers.map((header) => {
-                  return (
-                    <TableHead key={header.id}>
-                      {header.isPlaceholder
-                        ? null
-                        : flexRender(
-                            header.column.columnDef.header,
-                            header.getContext()
-                          )}
-                    </TableHead>
-                  );
-                })}
-              </TableRow>
-            ))}
-          </TableHeader>
-          <TableBody>
-            {table.getRowModel().rows?.length ? (
-              table.getRowModel().rows.map((row) => (
-                <TableRow
-                  key={row.id}
-                  data-state={row.getIsSelected() && "selected"}
-                >
-                  {row.getVisibleCells().map((cell) => (
-                    <TableCell key={cell.id}>
-                      {flexRender(
-                        cell.column.columnDef.cell,
-                        cell.getContext()
-                      )}
-                    </TableCell>
-                  ))}
-                </TableRow>
-              ))
-            ) : (
-              <TableRow>
-                <TableCell
-                  colSpan={columns.length}
-                  className="h-24 text-center"
-                >
-                  No results.
-                </TableCell>
-              </TableRow>
-            )}
-          </TableBody>
-        </Table>
+      <div className="max-w-sm my-4">
+        <Input
+          placeholder="Search..."
+          type="text"
+          defaultValue={searchItem}
+          onChange={handleInputChange}
+        />
       </div>
+      {searchPendig ? (
+        <div className="flex items-center py-10 justify-center">
+          <Loading />
+        </div>
+      ) : (
+        <div className="rounded-md border">
+          <Table>
+            <TableHeader>
+              {table.getHeaderGroups().map((headerGroup) => (
+                <TableRow key={headerGroup.id}>
+                  {headerGroup.headers.map((header) => {
+                    return (
+                      <TableHead key={header.id}>
+                        {header.isPlaceholder
+                          ? null
+                          : flexRender(
+                              header.column.columnDef.header,
+                              header.getContext()
+                            )}
+                      </TableHead>
+                    );
+                  })}
+                </TableRow>
+              ))}
+            </TableHeader>
+            <TableBody>
+              {table.getRowModel().rows?.length ? (
+                table.getRowModel().rows.map((row) => (
+                  <TableRow
+                    key={row.id}
+                    data-state={row.getIsSelected() && "selected"}
+                  >
+                    {row.getVisibleCells().map((cell) => (
+                      <TableCell key={cell.id}>
+                        {flexRender(
+                          cell.column.columnDef.cell,
+                          cell.getContext()
+                        )}
+                      </TableCell>
+                    ))}
+                  </TableRow>
+                ))
+              ) : (
+                <TableRow>
+                  <TableCell
+                    colSpan={columns.length}
+                    className="h-24 text-center"
+                  >
+                    No results.
+                  </TableCell>
+                </TableRow>
+              )}
+            </TableBody>
+          </Table>
+        </div>
+      )}
       <div className="flex items-center justify-end space-x-2 py-4">
         <div className="flex-1 text-sm text-muted-foreground">
           {table.getFilteredSelectedRowModel().rows.length} of{" "}

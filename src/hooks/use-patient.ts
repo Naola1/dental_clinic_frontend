@@ -2,6 +2,7 @@ import {
   getDoctorDashboardAppointment,
   getPatientDashboardAppointment,
   searchAppointment,
+  searchRecord,
 } from "@/api/patient";
 import { useQuery } from "@tanstack/react-query";
 
@@ -24,5 +25,12 @@ export const useSearchAppointment = (q?: string) => {
   return useQuery({
     queryKey: ["search-appointment", q],
     queryFn: () => searchAppointment({ q }),
+  });
+};
+
+export const useSearchRecord = (q?: string) => {
+  return useQuery({
+    queryKey: ["search-record", q],
+    queryFn: () => searchRecord({ q }),
   });
 };

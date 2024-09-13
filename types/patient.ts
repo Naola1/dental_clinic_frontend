@@ -93,3 +93,27 @@ interface SUser {
   last_name: string;
   role: string;
 }
+
+export interface ISearchRecord {
+  id: number;
+  patient: RPatient;
+  doctor: RPatient;
+  treatment: RTreatment;
+  treatment_date: string;
+  description?: string;
+  follow_up_date: null;
+}
+
+interface RTreatment {
+  id: number;
+  name: string;
+  description: string;
+}
+
+interface RPatient {
+  id: number;
+  username: string;
+  email: string;
+  first_name: string;
+  last_name: string;
+}
