@@ -1,88 +1,145 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { Phone, MapPin } from "lucide-react";
+import { Mail, Calendar, Bell, Video, User, Icon } from "lucide-react";
 import Logo from "../../assets/logo.png";
 import Smile from "../../assets/smile.jpg";
 import { useNavigate } from "react-router-dom";
-import AnimatedFeatures from "@/components/landing/FeatureSection";
+import { ReactNode } from "react";
+
+import RegistrationImage from "../../assets/registration.png";
+import AvailabilityImage from "../../assets/availability.png";
 
 const LandingPage = () => {
   const navigate = useNavigate();
   return (
-    <div className="flex flex-col min-h-screen">
-      <section className="w-full h-screen  bg-gradient-to-r from-blue-100 to-green-100">
-        <header className="px-4 lg:px-6 h-20 flex items-center">
-          <Link className="flex items-center justify-center" href="#">
-            <img src={Logo} height={180} width={180} className="object-cover" />
+    <div className="flex flex-col min-h-screen bg-gradient-to-b from-gray-900 via-blue-900 to-purple-900 text-white">
+      <section className="w-full min-h-screen relative overflow-hidden">
+        <div className="absolute inset-0 bg-[url('/grid.svg')] bg-center [mask-image:linear-gradient(180deg,white,rgba(255,255,255,0))]"></div>
+        <header className="relative z-10 px-4 lg:px-6 h-20 flex items-center">
+          <a className="flex items-center justify-center" href="#">
+            <img
+              src={Logo}
+              height={180}
+              width={180}
+              alt="Dental Clinic Logo"
+              className="object-cover"
+            />
             <span className="sr-only">Dental Clinic</span>
-          </Link>
+          </a>
           <nav className="ml-auto flex gap-4 sm:gap-6">
             <button
-              className="text-sm font-medium hover:underline underline-offset-4"
+              className="text-sm font-medium hover:text-blue-400 transition-colors hidden md:flex"
               onClick={() => navigate("/login")}
             >
               Login / Signup
             </button>
-            <Link
-              className="text-sm font-medium hover:underline underline-offset-4"
-              href="#services"
+            <a
+              className="text-sm font-medium hover:text-blue-400 transition-colors"
+              href="#features"
             >
-              Services
-            </Link>
-            <Link
-              className="text-sm font-medium hover:underline underline-offset-4"
+              Features
+            </a>
+            <a
+              className="text-sm font-medium hover:text-blue-400 transition-colors"
               href="#about"
             >
               About
-            </Link>
-            <Link
-              className="text-sm font-medium hover:underline underline-offset-4"
+            </a>
+            <a
+              className="text-sm font-medium hover:text-blue-400 transition-colors"
               href="#contact"
             >
               Contact
-            </Link>
+            </a>
           </nav>
         </header>
-        <div className="flex items-center justify-center h-[80%]">
-          <div className="flex flex-col  items-center space-y-4 text-center">
+        <div className="relative z-10 flex items-center justify-center min-h-[calc(100vh-5rem)]">
+          <div className="flex flex-col items-center space-y-4 text-center px-4">
             <div className="space-y-2">
-              <h1 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl lg:text-6xl/none py-3 0">
-                Dental Management System
+              <h1 className="text-4xl font-bold tracking-tighter sm:text-5xl md:text-6xl lg:text-7xl/none py-3 bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-600">
+                Dental Clinic Management System
               </h1>
-              <p className="mx-auto max-w-[700px] text-gray-500 md:text-xl dark:text-gray-400">
-                Your journey to a healthier, brighter smile starts here. Expert
-                care with a gentle touch. Making easy for you to book
-                appointments and keep track of your dental health
+              <p className="mx-auto max-w-[700px] text-blue-200 md:text-xl">
+                Effortless Management for Exceptional Dental Clinics.
               </p>
             </div>
             <div className="space-x-4">
-              <Button onClick={() => navigate("/login")} className="py-6">
-                Book Appointment
+              <Button
+                onClick={() => navigate("/login")}
+                className="py-6 px-8 bg-blue-600 hover:bg-blue-700 text-white rounded-full text-lg font-semibold transition-all duration-300 ease-in-out transform hover:scale-105"
+              >
+                Login/ Sign Up
               </Button>
             </div>
           </div>
         </div>
       </section>
 
-      <main className="flex-1 justify-center items-center w-full">
-        <section>
-          <AnimatedFeatures />
-        </section>
-        <section id="about" className="w-full py-12 md:py-24 lg:py-32 bg-white">
-          <div className=" px-4 md:px-6">
-            <div className="grid items-center gap-6 lg:grid-cols-2 lg:gap-12 xl:grid-cols-2">
-              <img
-                alt="Dental clinic interior"
-                className="mx-auto aspect-video overflow-hidden rounded-xl object-cover object-center sm:w-full lg:order-last"
-                height="310"
-                src={Smile}
-                width="550"
+      <main className="flex-1 w-full">
+        <section
+          id="features"
+          className="w-full py-20 md:py-32 lg:py-48 bg-gray-900"
+        >
+          <div className="container mx-auto px-4">
+            <h2 className="text-4xl font-bold tracking-tighter sm:text-5xl text-center mb-16 bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-600">
+              Web App Features
+            </h2>
+            <div className="space-y-24">
+              <FeatureCard
+                icon={<User />}
+                title="Secure User Accounts with JWT Authentication"
+                description="Streamline patient management with easy account creation and secure JWT authentication. Protect patient information while enabling seamless access 
+                to appointments and treatment history. Elevate your clinic’s service today!"
+                imageUrl={RegistrationImage}
+                isReversed={false}
               />
-              <div className="flex flex-col justify-center space-y-4">
-                <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl">
-                  About Us
+              <FeatureCard
+                icon={<Calendar />}
+                title="Streamlined Appointment Management"
+                description="Optimize your clinic's operations with our easy-to-use system. Allow patients to view doctor availability and book appointments online, reducing 
+                administrative tasks and minimizing no-shows. Enhance patient care with a seamless booking experience!"
+                imageUrl={AvailabilityImage}
+                isReversed={true}
+              />
+              <FeatureCard
+                icon={<Bell />}
+                title="Comprehensive Treatment History Access"
+                description="Empower patients with easy access to their treatment history, ensuring transparency and better understanding of their care. Doctors can also view 
+                and update their patients' treatment records, facilitating informed decision-making and personalized care. Enhance collaboration and continuity of care in your clinic!"
+                imageUrl="/placeholder.svg?height=600&width=300&text=Predictive+Alerts"
+                isReversed={false}
+              />
+              <FeatureCard
+                icon={<Video />}
+                title="Doctor Profiles"
+                description="Patients can view all clinic doctors, including their qualifications, specializations, and experience. 
+                This transparency helps patients make informed choices for their care."
+                imageUrl="/placeholder.svg?height=600&width=300&text=Holographic+Consult"
+                isReversed={true}
+              />
+            </div>
+          </div>
+        </section>
+
+        <section
+          id="about"
+          className="w-full py-20 md:py-32 lg:py-48 bg-gray-800"
+        >
+          <div className="container mx-auto px-4">
+            <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-24">
+              <div className="relative">
+                <div className="absolute inset-0 bg-blue-500 rounded-full blur-3xl opacity-20"></div>
+                <img
+                  alt="Futuristic dental care"
+                  className="relative rounded-2xl shadow-2xl"
+                  src={Smile}
+                />
+              </div>
+              <div className="flex flex-col justify-center space-y-6">
+                <h2 className="text-4xl font-bold tracking-tighter sm:text-5xl bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-600">
+                  Pioneering the Future of Dental Care
                 </h2>
-                <p className="max-w-[600px] text-gray-500 md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
+                <p className="text-blue-100 md:text-lg/relaxed lg:text-xl/relaxed xl:text-2xl/relaxed">
                   The Dental clinic Management System was born from the need to
                   improve the efficiency of dental clinic operations. Scheduling
                   appointments, managing patient records, and tracking doctors'
@@ -94,24 +151,6 @@ const LandingPage = () => {
                   development skills to create a real-world solution for
                   clinics.
                 </p>
-                {/* <ul className="grid gap-6 md:grid-cols-2">
-                  <li className="flex items-center space-x-2">
-                    <CheckCircleIcon className="h-5 w-5 text-green-500" />
-                    <span>State-of-the-art equipment</span>
-                  </li>
-                  <li className="flex items-center space-x-2">
-                    <CheckCircleIcon className="h-5 w-5 text-green-500" />
-                    <span>Experienced dental team</span>
-                  </li>
-                  <li className="flex items-center space-x-2">
-                    <CheckCircleIcon className="h-5 w-5 text-green-500" />
-                    <span>Comfortable atmosphere</span>
-                  </li>
-                  <li className="flex items-center space-x-2">
-                    <CheckCircleIcon className="h-5 w-5 text-green-500" />
-                    <span>Personalized care plans</span>
-                  </li>
-                </ul> */}
               </div>
             </div>
           </div>
@@ -119,83 +158,167 @@ const LandingPage = () => {
 
         <section
           id="contact"
-          className="w-full py-12 md:py-24 lg:py-32 bg-gray-100"
+          className="w-full py-20 md:py-32 lg:py-48 bg-gray-900"
         >
-          <div className=" px-4 md:px-6">
-            <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl text-center mb-12">
-              Contact Us
+          <div className="container mx-auto px-4">
+            <h2 className="text-4xl font-bold tracking-tighter sm:text-5xl text-center mb-16 bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-600">
+              Connect with the Innovator
             </h2>
-            <div className="grid gap-6 lg:grid-cols-2 lg:gap-12">
-              <div className="flex flex-col space-y-4">
-                <h3 className="text-2xl font-bold">Get in Touch</h3>
-                <p className="text-gray-500">
-                  We're here to answer any questions you may have about our
-                  services.
-                </p>
-                <div className="flex items-center space-x-2">
-                  <Phone className="h-5 w-5 text-blue-500" />
-                  <span>(123) 456-7890</span>
+            <div className="max-w-2xl mx-auto">
+              <Card className="overflow-hidden bg-gray-800 border-gray-700">
+                <CardContent className="p-6">
+                  <div className="flex flex-col items-center text-center">
+                    <img
+                      src="/placeholder.svg?height=150&width=150"
+                      alt="Naol Mitiku"
+                      className="rounded-full w-32 h-32 object-cover mb-4 border-4 border-blue-500"
+                    />
+                    <h3 className="text-2xl font-bold mb-2 text-blue-400">
+                      Naol Mitiku
+                    </h3>
+                    <p className="text-purple-300 mb-4">
+                      Visionary Full Stack Developer
+                    </p>
+                    <p className="text-blue-100 mb-6">
+                      Passionate about pushing the boundaries of dental
+                      technology. Let's collaborate on shaping the future of
+                      healthcare!
+                    </p>
+                    <div className="flex flex-wrap justify-center gap-4">
+                      <SocialLink
+                        href="https://www.linkedin.com/in/naol-mitiku-0a48a423b"
+                        icon={<Linkedin className="h-5 w-5" />}
+                        label="LinkedIn"
+                        color="bg-blue-600"
+                      />
+                      <SocialLink
+                        href="https://github.com/Naola1"
+                        icon={<Github className="h-5 w-5" />}
+                        label="GitHub"
+                        color="bg-gray-700"
+                      />
+                      <SocialLink
+                        href="mailto:naolmitiku@example.com"
+                        icon={<Mail className="h-5 w-5" />}
+                        label="Email"
+                        color="bg-red-600"
+                      />
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+              <div className="mt-12 space-y-4">
+                <h4 className="text-2xl font-semibold text-center text-blue-400">
+                  Project Repositories
+                </h4>
+                <div className="flex flex-col sm:flex-row justify-center gap-4">
+                  <a
+                    href="https://github.com/Naola1/dental_clinic_frontend"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center justify-center gap-2 bg-gray-800 hover:bg-gray-700 text-blue-400 px-6 py-3 rounded-full transition-colors"
+                    aria-label="Front-end source code on GitHub"
+                  >
+                    <Github className="h-5 w-5" />
+                    <span>Front-end Source</span>
+                  </a>
+                  <a
+                    href="https://github.com/Naola1/dental_clinic-backend"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center justify-center gap-2 bg-gray-800 hover:bg-gray-700 text-blue-400 px-6 py-3 rounded-full transition-colors"
+                    aria-label="Back-end source code on GitHub"
+                  >
+                    <Github className="h-5 w-5" />
+                    <span>Back-end Source</span>
+                  </a>
                 </div>
-                <div className="flex items-center space-x-2">
-                  <MapPin className="h-5 w-5 text-blue-500" />
-                  <span>Addis Ababa, Ethiopia</span>
-                </div>
-              </div>
-              <div className="flex flex-col space-y-4">
-                <h3 className="text-2xl font-bold">Developer contact</h3>
-                <a
-                  href="https://www.linkedin.com/in/naol-mitiku-0a48a423b"
-                  className="flex gap-2 items-center"
-                  target="_blank"
-                >
-                  <Linkedin className="size-8" />
-                  <h1>Naol Mitiku</h1>
-                </a>
-                <a
-                  href="https://github.com/Naola1"
-                  target="_blank"
-                  className="flex gap-2 items-center"
-                >
-                  <Github className="size-6" />
-                  <h1>Naol Mitiku</h1>
-                </a>
-                <a
-                  href="https://github.com/Naola1/dental_clinic_frontend"
-                  target="_blank"
-                  className="flex gap-2 items-center"
-                >
-                  <Github className="size-6" />
-                  <h1>Front-end source code</h1>
-                </a>
-                <a
-                  href="https://github.com/Naola1/dental_clinic-backend"
-                  target="_blank"
-                  className="flex gap-2 items-center"
-                >
-                  <Github className="size-6" />
-                  <h1>Back-end source code</h1>
-                </a>
               </div>
             </div>
           </div>
         </section>
       </main>
-      <footer className="flex flex-col gap-2 sm:flex-row py-6 w-full shrink-0 items-center px-4 md:px-6 border-t">
-        <p className="text-xs text-gray-500">
-          © 2024 Lily Dental Clinic. All rights reserved.
-        </p>
-        <nav className="sm:ml-auto flex gap-4 sm:gap-6">
-          <Link className="text-xs hover:underline underline-offset-4" href="#">
-            Terms of Service
-          </Link>
-          <Link className="text-xs hover:underline underline-offset-4" href="#">
-            Privacy
-          </Link>
-        </nav>
+      <footer className="bg-gray-900 border-t border-gray-800">
+        <div className="container mx-auto px-4 py-8">
+          <div className="flex flex-col sm:flex-row justify-between items-center">
+            <p className="text-sm text-gray-400">
+              © 2024 Next-Gen Dental Management. All rights reserved.
+            </p>
+            <nav className="flex gap-4 sm:gap-6 mt-4 sm:mt-0">
+              <a
+                className="text-sm text-gray-400 hover:text-blue-400 transition-colors"
+                href="#"
+              >
+                Terms of Service
+              </a>
+              <a
+                className="text-sm text-gray-400 hover:text-blue-400 transition-colors"
+                href="#"
+              >
+                Privacy Policy
+              </a>
+            </nav>
+          </div>
+        </div>
       </footer>
     </div>
   );
 };
+
+interface FeaturesCardProps {
+  icon?: ReactNode;
+  title: string;
+  description: string;
+  imageUrl: string;
+  isReversed: boolean;
+}
+const FeatureCard = ({
+  icon,
+  title,
+  description,
+  imageUrl,
+  isReversed,
+}: FeaturesCardProps) => (
+  <div
+    className={`flex flex-col ${
+      isReversed ? "md:flex-row-reverse" : "md:flex-row"
+    } items-center gap-8`}
+  >
+    <div className="md:w-1/2">
+      <img
+        src={imageUrl}
+        alt={title}
+        className="rounded-2xl shadow-2xl mx-auto w-full max-w-md"
+      />
+    </div>
+    <div className="md:w-1/2 space-y-4">
+      <div className="flex items-center gap-4">
+        {icon}
+        <h3 className="text-2xl font-semibold text-blue-300">{title}</h3>
+      </div>
+      <p className="text-blue-100 text-lg">{description}</p>
+    </div>
+  </div>
+);
+
+interface SocialLinkProps {
+  href: string;
+  icon: ReactNode;
+  label: string;
+  color: string;
+}
+const SocialLink = ({ href, icon, label, color }: SocialLinkProps) => (
+  <a
+    href={href}
+    className={`flex items-center gap-2 ${color} hover:opacity-90 text-white px-4 py-2 rounded-full transition-all duration-300 ease-in-out transform hover:scale-105`}
+    target="_blank"
+    rel="noopener noreferrer"
+    aria-label={`${label} profile`}
+  >
+    {icon ?? <Icon className="h-5 w-5" iconNode={[]} />}
+    <span>{label}</span>
+  </a>
+);
 
 export default LandingPage;
 
@@ -242,165 +365,6 @@ function Linkedin(props: any) {
         fill="#fff"
         d="M12,19h5v17h-5V19z M14.485,17h-0.028C12.965,17,12,15.888,12,14.499C12,13.08,12.995,12,14.514,12	c1.521,0,2.458,1.08,2.486,2.499C17,15.887,16.035,17,14.485,17z M36,36h-5v-9.099c0-2.198-1.225-3.698-3.192-3.698	c-1.501,0-2.313,1.012-2.707,1.99C24.957,25.543,25,26.511,25,27v9h-5V19h5v2.616C25.721,20.5,26.85,19,29.738,19	c3.578,0,6.261,2.25,6.261,7.274L36,36L36,36z"
       ></path>
-    </svg>
-  );
-}
-
-function BabyIcon(props: any) {
-  return (
-    <svg
-      {...props}
-      xmlns="http://www.w3.org/2000/svg"
-      width="24"
-      height="24"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    >
-      <path d="M9 12h.01" />
-      <path d="M15 12h.01" />
-      <path d="M10 16c.5.3 1.2.5 2 .5s1.5-.2 2-.5" />
-      <path d="M19 6.3a9 9 0 0 1 1.8 3.9 2 2 0 0 1 0 3.6 9 9 0 0 1-17.6 0 2 2 0 0 1 0-3.6A9 9 0 0 1 12 3c2 0 3.5 1.1 3.5 2.5s-.9 2.5-2 2.5c-.8 0-1.5-.4-1.5-1" />
-    </svg>
-  );
-}
-
-function BraceIcon(props: any) {
-  return (
-    <svg
-      {...props}
-      xmlns="http://www.w3.org/2000/svg"
-      width="24"
-      height="24"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    >
-      <path d="M12 4v16" />
-      <path d="M8 4v4" />
-      <path d="M16 4v4" />
-      <path d="M8 20v-4" />
-      <path d="M16 20v-4" />
-      <path d="M4 9h16" />
-      <path d="M8 9v6" />
-      <path d="M16 9v6" />
-    </svg>
-  );
-}
-
-function CheckCircleIcon(props: any) {
-  return (
-    <svg
-      {...props}
-      xmlns="http://www.w3.org/2000/svg"
-      width="24"
-      height="24"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    >
-      <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" />
-      <polyline points="22 4 12 14.01 9 11.01" />
-    </svg>
-  );
-}
-
-function GumIcon(props: any) {
-  return (
-    <svg
-      {...props}
-      xmlns="http://www.w3.org/2000/svg"
-      width="24"
-      height="24"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    >
-      <path d="M12 5c-1.7-1-3.4-2-5-2-2.6 0-5 1.6-5 5 0 3.5 3 6 3 9 0 1.6 1.3 3 3 3 .6 0 1.2-.3 1.6-.8" />
-      <path d="M12 5c1.7-1 3.4-2 5-2 2.6 0 5 1.6 5 5 0 3.5-3 6-3 9 0 1.6-1.3 3-3 3-.6 0-1.2-.3-1.6-.8" />
-    </svg>
-  );
-}
-
-function Link(props: any) {
-  return <a {...props} rel="noopener noreferrer" />;
-}
-
-function ScalpelIcon(props: any) {
-  return (
-    <svg
-      {...props}
-      xmlns="http://www.w3.org/2000/svg"
-      width="24"
-      height="24"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    >
-      <path d="M17 3c-2.22 0-3.67.35-5.22 1.4C10.23 5.48 8.47 7.24 7.39 8.33A2.44 2.44 0 0 0 7 10c0 1.1.9 2 2 2 1.45 0 2.39-1.03 3.49-2.13C13.19 9.17 14 7.41 14 5c0-1.1-.9-2-2-2" />
-      <path d="m11.73 13.27-1.46 1.46c-.80.8-2 .80-2.80 0L2 9.27 5.27 6 12 12.73" />
-      <path d="M22 22 6 6" />
-    </svg>
-  );
-}
-
-function SparklesIcon(props: any) {
-  return (
-    <svg
-      {...props}
-      xmlns="http://www.w3.org/2000/svg"
-      width="24"
-      height="24"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    >
-      <path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z" />
-      <path d="M5 3v4" />
-      <path d="M19 17v4" />
-      <path d="M3 5h4" />
-      <path d="M17 19h4" />
-    </svg>
-  );
-}
-
-function ToothIcon(props: any) {
-  return (
-    <svg
-      {...props}
-      xmlns="http://www.w3.org/2000/svg"
-      width="24"
-      height="24"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    >
-      <path d="M12 5.5c-1.5-1-2.5-2-3-3 .5 1.5 1 2 2 2.5s2.5.5 4 0c1 .5 2.5 1 3.5.5a5.5 5.5 0 0 1-2.5 3c.5 1.5 2 3.5 2 5.5s-1.5 3-3 3c-1 0-1.5-.5-2-1" />
-      <path d="M12 5.5C10.5 4.5 9.5 3.5 9 2.5c.5 1.5 1 2 2 2.5s2.5.5 4 0c1 .5 2.5 1 3.5.5a5.5 5.5 0 0 1-2.5 3c.5 1.5 2 3.5 2 5.5s-1.5 3-3 3c-1 0-1.5-.5-2-1" />
-      <path d="M6.5 13.5c0 1.5.5 3 2.5 3s2.5-1.5 2.5-3-1-1.5-2-1.5-3 .5-3 1.5" />
-      <path d="M9.5 9c-.5-1-1.5-2-2-3" />
-      <path d="M7 16c-1 1-1 3.5-2 5.5" />
     </svg>
   );
 }
