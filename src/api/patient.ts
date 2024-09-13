@@ -1,6 +1,7 @@
 import {
   IDoctorAppointmentDashboard,
   IPAppointmentDashboard,
+  ISearch,
 } from "../../types/patient";
 import axiosInstance from "./axios";
 
@@ -18,5 +19,14 @@ export const getDoctorDashboardAppointment = async ({
   const response = await axiosInstance.get(
     `/appointments/?page_size=${page_size}`
   );
+  return response.data;
+};
+
+export const searchAppointment = async ({
+  q,
+}: {
+  q?: string;
+}): Promise<ISearch[]> => {
+  const response = await axiosInstance.get(`/appointments/search?query=${q}`);
   return response.data;
 };

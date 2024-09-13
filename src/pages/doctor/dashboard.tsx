@@ -8,7 +8,7 @@ const DoctorDashboard = () => {
       <DashboardHeader name={"Dr. Naol"} />
       <h1 className="py-4 text-xl font-bold px-6">Your Appointment</h1>
 
-      <DoctorAppointmentTable />
+      <DoctorAppointmentTable showSearch={false} />
 
       <h1 className="py-4 text-xl font-bold px-6">Recent Patient Record</h1>
       <DoctorTreatmentTable />

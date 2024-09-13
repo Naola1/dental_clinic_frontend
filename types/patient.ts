@@ -64,3 +64,32 @@ interface DUser {
   last_name: string;
   role: string;
 }
+
+export interface ISearch {
+  id: number;
+  patient: SPatient;
+  doctor: SDoctor;
+  appointment_date: string;
+  status: string;
+}
+
+interface SDoctor {
+  id: number;
+  user: SUser;
+  specialization: string;
+}
+
+interface SPatient {
+  id: number;
+  user: User;
+}
+
+interface SUser {
+  id: number;
+  username: string;
+  email: string;
+  first_name: string;
+  middle_name: string;
+  last_name: string;
+  role: string;
+}

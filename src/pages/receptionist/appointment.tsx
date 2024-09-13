@@ -5,7 +5,7 @@ const ReceptionistAppointment = () => {
     <div>
       <h1 className="py-4 text-xl font-bold px-6">Doctor Appointment</h1>
 
-      <DoctorAppointmentTable />
+      <DoctorAppointmentTable showSearch={false} />
     </div>
   );
 };
