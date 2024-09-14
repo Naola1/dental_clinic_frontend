@@ -30,6 +30,7 @@ import { DialogComponent } from "../dialog";
 import DocAddRecordForm from "./DocAddRecordForm";
 import { Input } from "../ui/input";
 import { useDebouncedCallback } from "use-debounce";
+import { SelectStatus } from "../dropdown/dropdown-status";
 
 export type DoctorAvailability = {
   id: number;
@@ -67,9 +68,15 @@ export const columns: ColumnDef<DoctorAvailability>[] = [
   {
     accessorKey: "status",
     header: "Status",
-    cell: ({ row }) => (
-      <div className="capitalize">{row.getValue("status")}</div>
-    ),
+    cell: ({ row }) => {
+      const original = row.original;
+      return (
+        <SelectStatus
+          placeholder={row.getValue("status")}
+          appointmentId={original.id}
+        />
+      );
+    },
   },
   {
     header: "Actions",

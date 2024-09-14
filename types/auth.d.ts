@@ -1,3 +1,5 @@
+import { Description } from "@radix-ui/react-toast";
+
 export interface ILogin {
   email: string;
   password: string;
@@ -40,4 +42,17 @@ interface User {
   emergency_contact_name: string;
   emergency_contact_number: string;
   role: string;
+}
+
+interface ITreatmentRes {
+  count: number;
+  next: null;
+  previous: null;
+  results: IResult[];
+}
+
+interface IResult {
+  id: number;
+  name: string;
+  description: string;
 }

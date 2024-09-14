@@ -4,12 +4,14 @@ import Loading from "@/components/loading/Loading";
 import { Button } from "@/components/ui/button";
 import { Form } from "@/components/ui/form";
 import { useDocAddRecord } from "@/hooks/use-auth";
+import { useGetTreatments } from "@/hooks/use-doctor";
 import { DocAddRecord } from "@/schema/auth";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { z } from "zod";
+import { SelectForm } from "../dropdown/treatment-list";
 
 interface DocAddRecordFormProps {
   patient: number;
@@ -21,6 +23,15 @@ const DocAddRecordForm = ({ patient }: DocAddRecordFormProps) => {
   const [error, setError] = useState(undefined);
 
   const addRecord = useDocAddRecord();
+
+  const { data, isFetching } = useGetTreatments();
+
+  const items = data?.results.map((item) => {
+    return {
+      value: item.id,
+      key: item.name,
+    };
+  });
 
   const form = useForm<z.infer<typeof DocAddRecord>>({
     resolver: zodResolver(DocAddRecord),
@@ -43,6 +54,14 @@ const DocAddRecordForm = ({ patient }: DocAddRecordFormProps) => {
     }
   }, [addRecord.isSuccess]);
 
+  if (isFetching) {
+    return (
+      <div className="flex justify-center">
+        <Loading />
+      </div>
+    );
+  }
+
   return (
     <div className="flex flex-col items-center justify-center py-10 w-full">
       <Form {...form}>
@@ -50,6 +69,13 @@ const DocAddRecordForm = ({ patient }: DocAddRecordFormProps) => {
           onSubmit={form.handleSubmit(onSubmit)}
           className="w-full space-y-6"
         >
+          <SelectForm
+            control={form.control}
+            label={"Treatment"}
+            placeholder={"Treatment"}
+            name={"treatment"}
+            items={items ?? []}
+          />
           <InputForm
             control={form.control}
             label={"Description"}

@@ -75,6 +75,13 @@ export interface BookingProps {
   };
 }
 
+export interface IAppointmentStatus {
+  id: number;
+  data: {
+    status: string;
+  };
+}
+
 interface IDoctorsAvailablity {
   count: number;
   next: null;

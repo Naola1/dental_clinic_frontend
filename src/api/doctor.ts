@@ -1,5 +1,6 @@
 import {
   BookingProps,
+  IAppointmentStatus,
   IBookingResponse,
   IDoctorResponse,
   IDoctorsAvailablitySingle,
@@ -34,5 +35,18 @@ export const getSingleDoctorAvailablity = async (
   id: number
 ): Promise<IDoctorsAvailablitySingle[]> => {
   const response = await axiosInstance.get(`/doctors/${id}/availability`);
+  return response.data;
+};
+
+export const changeAppointmentStatus = async ({
+  id,
+  data,
+}: IAppointmentStatus) => {
+  const response = await axiosInstance.put(
+    `/appointments/${id}/change_status/`,
+    {
+      status: data.status,
+    }
+  );
   return response.data;
 };

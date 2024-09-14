@@ -1,11 +1,13 @@
 import {
   booking,
+  changeAppointmentStatus,
   getAllDoctors,
   getSingleDoctor,
   getSingleDoctorAvailablity,
 } from "@/api/doctor";
+import { getTreatments } from "@/api/profile";
 import { useMutation, useQuery } from "@tanstack/react-query";
-import { BookingProps } from "types/doctor";
+import { BookingProps, IAppointmentStatus } from "types/doctor";
 
 export const useAllDoctors = () => {
   return useQuery({
@@ -31,5 +33,19 @@ export const usePDA = (id: number) => {
   return useQuery({
     queryKey: ["pda"],
     queryFn: () => getSingleDoctorAvailablity(id),
+  });
+};
+
+export const useChangeStatus = () => {
+  return useMutation({
+    mutationFn: ({ id, data }: IAppointmentStatus) =>
+      changeAppointmentStatus({ id, data }),
+  });
+};
+
+export const useGetTreatments = () => {
+  return useQuery({
+    queryKey: ["treatments"],
+    queryFn: getTreatments,
   });
 };

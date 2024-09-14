@@ -1,6 +1,6 @@
 import { IPatientProfile } from "types/profile";
 import axiosInstance from "./axios";
-import { IProfileUpdate } from "types/auth";
+import { IProfileUpdate, ITreatmentRes } from "types/auth";
 import { z } from "zod";
 import {
   DocAddRecord,
@@ -36,5 +36,10 @@ export const profileUpdateDoctor = async (
 
 export const docAddRecrord = async (data: z.infer<typeof DocAddRecord>) => {
   const response = await axiosInstance.post("/doctor/history/", data);
+  return response.data;
+};
+
+export const getTreatments = async (): Promise<ITreatmentRes> => {
+  const response = await axiosInstance.get("/treatments");
   return response.data;
 };
