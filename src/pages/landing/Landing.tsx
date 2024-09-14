@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { Mail, Calendar, Bell, Video, User, Icon } from "lucide-react";
+import { Mail, Calendar, Bell, Video, User, Icon, Folder } from "lucide-react";
 import Logo from "../../assets/logo.png";
 import Smile from "../../assets/smile.jpg";
 import { useNavigate } from "react-router-dom";
@@ -89,7 +89,7 @@ const LandingPage = () => {
                 icon={<User />}
                 title="Secure User Accounts with JWT Authentication"
                 description="Streamline patient management with easy account creation and secure JWT authentication. Protect patient information while enabling seamless access 
-                to appointments and treatment history. Elevate your clinic’s service today!"
+                to appointments and treatment history. Elevate your clinic's service today!"
                 imageUrl={RegistrationImage}
                 isReversed={false}
               />
@@ -102,7 +102,7 @@ const LandingPage = () => {
                 isReversed={true}
               />
               <FeatureCard
-                icon={<Bell />}
+                icon={<Folder />}
                 title="Comprehensive Treatment History Access"
                 description="Empower patients with easy access to their treatment history, ensuring transparency and better understanding of their care. Doctors can also view 
                 and update their patients' treatment records, facilitating informed decision-making and personalized care. Enhance collaboration and continuity of care in your clinic!"
@@ -110,7 +110,7 @@ const LandingPage = () => {
                 isReversed={false}
               />
               <FeatureCard
-                icon={<Video />}
+                icon={<User />}
                 title="Doctor Profiles"
                 description="Patients can view all clinic doctors, including their qualifications, specializations, and experience. 
                 This transparency helps patients make informed choices for their care."
@@ -137,7 +137,7 @@ const LandingPage = () => {
               </div>
               <div className="flex flex-col justify-center space-y-6">
                 <h2 className="text-4xl font-bold tracking-tighter sm:text-5xl bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-600">
-                  Pioneering the Future of Dental Care
+                  Inspiration Behind the Project
                 </h2>
                 <p className="text-blue-100 md:text-lg/relaxed lg:text-xl/relaxed xl:text-2xl/relaxed">
                   The Dental clinic Management System was born from the need to
@@ -162,7 +162,7 @@ const LandingPage = () => {
         >
           <div className="container mx-auto px-4">
             <h2 className="text-4xl font-bold tracking-tighter sm:text-5xl text-center mb-16 bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-600">
-              Connect with the Innovator
+              Connect with the Developer
             </h2>
             <div className="max-w-2xl mx-auto">
               <Card className="overflow-hidden bg-gray-800 border-gray-700">
@@ -242,7 +242,7 @@ const LandingPage = () => {
         <div className="container mx-auto px-4 py-8">
           <div className="flex flex-col sm:flex-row justify-between items-center">
             <p className="text-sm text-gray-400">
-              © 2024 Next-Gen Dental Management. All rights reserved.
+              © 2024 Dental Clinic Management. All rights reserved.
             </p>
             <nav className="flex gap-4 sm:gap-6 mt-4 sm:mt-0">
               <a
@@ -285,11 +285,18 @@ const FeatureCard = ({
     } items-center gap-8`}
   >
     <div className="md:w-1/2">
-      <img
-        src={imageUrl}
-        alt={title}
-        className="rounded-2xl shadow-2xl mx-auto w-full max-w-md"
-      />
+      <div className="relative mx-auto w-full max-w-[300px]">
+        <div className="absolute inset-0 bg-gradient-to-r from-blue-500 to-purple-600 rounded-[48px] blur-lg opacity-75"></div>
+        <div className="relative bg-black rounded-[48px] overflow-hidden shadow-xl">
+          <div className="absolute top-0 left-1/2 transform -translate-x-1/2 h-6 w-40 bg-black rounded-b-3xl z-10"></div>
+          <div className="pt-2 px-4 pb-10">
+            <div className="relative bg-gray-800 rounded-[40px] overflow-hidden">
+              <img src={imageUrl} alt={title} className="w-full h-auto" />
+            </div>
+          </div>
+          <div className="absolute bottom-2 left-1/2 transform -translate-x-1/2 w-32 h-1 bg-gray-800 rounded-full"></div>
+        </div>
+      </div>
     </div>
     <div className="md:w-1/2 space-y-4">
       <div className="flex items-center gap-4">
@@ -310,7 +317,8 @@ interface SocialLinkProps {
 const SocialLink = ({ href, icon, label, color }: SocialLinkProps) => (
   <a
     href={href}
-    className={`flex items-center gap-2 ${color} hover:opacity-90 text-white px-4 py-2 rounded-full transition-all duration-300 ease-in-out transform hover:scale-105`}
+    className={`flex items-center gap-2 ${color} hover:opacity-90 text-white px-4 py-2 rounde
+d-full transition-all duration-300 ease-in-out transform hover:scale-105`}
     target="_blank"
     rel="noopener noreferrer"
     aria-label={`${label} profile`}
