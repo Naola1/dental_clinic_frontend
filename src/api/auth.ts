@@ -4,6 +4,7 @@ import {
   IForgotPassword,
   ILogin,
   IRegister,
+  IResetPassword,
   LoginResponse,
 } from "../../types/auth";
 
@@ -28,6 +29,16 @@ export const forgotPassword = async (
 ): Promise<ForgotPasswordRes> => {
   const response = await axios.post(
     "https://dental-clinic-lqrz.onrender.com/api/password_reset/",
+    data
+  );
+  return response.data;
+};
+
+export const resetPassword = async (
+  data: IResetPassword
+): Promise<ForgotPasswordRes> => {
+  const response = await axios.post(
+    "https://dental-clinic-lqrz.onrender.com/api/password_reset/confirm",
     data
   );
   return response.data;

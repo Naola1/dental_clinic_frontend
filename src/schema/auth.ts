@@ -15,6 +15,22 @@ export const ForgotPasswordSchema = z.object({
   }),
 });
 
+export const ResetPasswordSchema = z
+  .object({
+    token: z.string().optional(),
+    password: z.string().min(6, {
+      message: "Password must be greater that 6 characters",
+    }),
+
+    confirmPassword: z.string().min(6, {
+      message: "Confirm password must be greater that 6 characters",
+    }),
+  })
+  .refine((data) => data.password === data.confirmPassword, {
+    message: "Password must match",
+    path: ["confirmPassword"],
+  });
+
 export const RegisterSchema = z
   .object({
     email: z.string({

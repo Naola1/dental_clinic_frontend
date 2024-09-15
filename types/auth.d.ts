@@ -9,6 +9,11 @@ export interface IForgotPassword {
   email: string;
 }
 
+export interface IResetPassword {
+  token: string;
+  password: string;
+}
+
 export interface IRegister {
   email: string;
   username: string;

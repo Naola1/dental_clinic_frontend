@@ -21,6 +21,7 @@ import ReceptionistDashboard from "@/pages/receptionist/dashboard";
 import ReceptionistDoctor from "@/pages/receptionist/doctors";
 import EditProfileReceptionist from "@/pages/receptionist/edit-profile";
 import ReceptionistProfile from "@/pages/receptionist/profile";
+import ResetPassword from "@/pages/reset-password/ResetPassword";
 import {
   DoctorSidebar,
   PatientSidebar,
@@ -40,6 +41,10 @@ export const router = createBrowserRouter([
   {
     path: "/forgot-password",
     element: <ForgotPassword />,
+  },
+  {
+    path: "/reset-password",
+    element: <ResetPassword />,
   },
   {
     path: "/register",
