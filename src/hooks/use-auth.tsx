@@ -74,5 +74,11 @@ export const useForgotPassword = () => {
 export const useResetPassword = () => {
   return useMutation({
     mutationFn: resetPassword,
+    onSuccess: () => {
+      toast({
+        variant: "default",
+        title: "Password reset Successful",
+      });
+    },
   });
 };

@@ -38,7 +38,7 @@ export const resetPassword = async (
   data: IResetPassword
 ): Promise<ForgotPasswordRes> => {
   const response = await axios.post(
-    "https://dental-clinic-lqrz.onrender.com/api/password_reset/confirm",
+    "https://dental-clinic-lqrz.onrender.com/api/password_reset/confirm/",
     data
   );
   return response.data;
