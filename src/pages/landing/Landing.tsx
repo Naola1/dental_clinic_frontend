@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { Mail, Calendar, Bell, Video, User, Icon, Folder } from "lucide-react";
+import { Mail, Calendar, User, Icon, Folder } from "lucide-react";
 import Logo from "../../assets/logo.png";
 import Smile from "../../assets/smile.jpg";
 import { useNavigate } from "react-router-dom";
