@@ -5,6 +5,10 @@ export interface ILogin {
   password: string;
 }
 
+export interface IForgotPassword {
+  email: string;
+}
+
 export interface IRegister {
   email: string;
   username: string;
@@ -17,6 +21,10 @@ export interface LoginResponse {
   email: string;
   role: string;
   access_token: string;
+}
+
+export interface ForgotPasswordRes {
+  status: string;
 }
 export interface SidebarItem {
   title: string;

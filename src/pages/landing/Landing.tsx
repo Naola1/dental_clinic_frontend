@@ -8,6 +8,9 @@ import { ReactNode } from "react";
 
 import RegistrationImage from "../../assets/registration.png";
 import AvailabilityImage from "../../assets/availability.png";
+import TreatmentImage from "../../assets/Treatment.png";
+import DoctorsImage from "../../assets/doctors.png";
+import Photo from "../../assets/photo1.png";
 
 const LandingPage = () => {
   const navigate = useNavigate();
@@ -106,7 +109,7 @@ const LandingPage = () => {
                 title="Comprehensive Treatment History Access"
                 description="Empower patients with easy access to their treatment history, ensuring transparency and better understanding of their care. Doctors can also view 
                 and update their patients' treatment records, facilitating informed decision-making and personalized care. Enhance collaboration and continuity of care in your clinic!"
-                imageUrl="/placeholder.svg?height=600&width=300&text=Predictive+Alerts"
+                imageUrl={TreatmentImage}
                 isReversed={false}
               />
               <FeatureCard
@@ -114,7 +117,7 @@ const LandingPage = () => {
                 title="Doctor Profiles"
                 description="Patients can view all clinic doctors, including their qualifications, specializations, and experience. 
                 This transparency helps patients make informed choices for their care."
-                imageUrl="/placeholder.svg?height=600&width=300&text=Holographic+Consult"
+                imageUrl={DoctorsImage}
                 isReversed={true}
               />
             </div>
@@ -169,7 +172,9 @@ const LandingPage = () => {
                 <CardContent className="p-6">
                   <div className="flex flex-col items-center text-center">
                     <img
-                      src="/placeholder.svg?height=150&width=150"
+                      src={Photo}
+                      height={180}
+                      width={180}
                       alt="Naol Mitiku"
                       className="rounded-full w-32 h-32 object-cover mb-4 border-4 border-blue-500"
                     />
@@ -242,7 +247,7 @@ const LandingPage = () => {
         <div className="container mx-auto px-4 py-8">
           <div className="flex flex-col sm:flex-row justify-between items-center">
             <p className="text-sm text-gray-400">
-              © 2024 Dental Clinic Management. All rights reserved.
+              © 2024 Dental Clinic Management.
             </p>
             <nav className="flex gap-4 sm:gap-6 mt-4 sm:mt-0">
               <a
