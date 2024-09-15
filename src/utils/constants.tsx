@@ -13,10 +13,7 @@ export const PatientSidebar: SidebarItem[] = [
     title: "Treatment",
     href: "/patient/treatment",
   },
-  {
-    title: "Notification",
-    href: "/patient/notification",
-  },
+
   {
     title: "Profile",
     href: "/patient/profile",
