@@ -12,6 +12,7 @@ import { useResetPassword } from "@/hooks/use-auth";
 import Loading from "../loading/Loading";
 import { useEffect, useState } from "react";
 import { AlertMessage } from "../alert/Alert";
+import { AxiosError } from "axios";
 
 export function ResetPasswordForm() {
   const navigate = useNavigate();
@@ -44,7 +45,9 @@ export function ResetPasswordForm() {
       navigate("/login");
     }
     if (reset_password.isError) {
-      console.log(reset_password.error);
+      if (reset_password.error instanceof AxiosError) {
+        setError(reset_password.error.response?.data);
+      }
     }
   }, [reset_password.error, reset_password.data]);
 
