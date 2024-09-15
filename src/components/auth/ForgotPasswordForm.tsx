@@ -1,63 +1,41 @@
 import { Button } from "@/components/ui/button";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
-import { LoginSchema } from "@/schema/auth";
+import { ForgotPasswordSchema } from "@/schema/auth";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { z } from "zod";
 import { Form } from "../ui/form";
 import { InputForm } from "../input-form/input";
-import { useLogin } from "@/hooks/use-auth";
+import { useForgotPassword } from "@/hooks/use-auth";
 import Loading from "../loading/Loading";
 import { useEffect, useState } from "react";
-import { AxiosError } from "axios";
 import { AlertMessage } from "../alert/Alert";
 
-export function LoginForm() {
+export function ForgotPasswordForm() {
   const navigate = useNavigate();
   const [error, setError] = useState(undefined);
 
-  const form = useForm<z.infer<typeof LoginSchema>>({
-    resolver: zodResolver(LoginSchema),
+  const form = useForm<z.infer<typeof ForgotPasswordSchema>>({
+    resolver: zodResolver(ForgotPasswordSchema),
     defaultValues: {
       email: "",
-      password: "",
     },
   });
 
-  const login = useLogin();
+  const forgot_password = useForgotPassword();
 
-  async function onSubmit(data: z.infer<typeof LoginSchema>) {
+  async function onSubmit(data: z.infer<typeof ForgotPasswordSchema>) {
     setError(undefined);
-    await login.mutateAsync(data);
+    await forgot_password.mutateAsync(data);
   }
 
   useEffect(() => {
-    if (login.isError && login.error instanceof AxiosError) {
-      if (login.error.response?.data?.error) {
-        setError(login.error.response?.data?.error);
-      }
+    if (forgot_password.data?.status === "OK") {
+      navigate("/login");
     }
-
-    if (login.data?.role === "patient") {
-      navigate("/patient/dashboard");
-    }
-
-    if (login.data?.role === "doctor") {
-      navigate("/doctor/dashboard");
-    }
-
-    if (login.data?.role === "receptionist") {
-      navigate("/receptionist/dashboard");
-    }
-  }, [login.error, login.data]);
+  }, [forgot_password.error, forgot_password.data]);
 
   return (
     <div className="flex flex-col items-center justify-center h-screen">
@@ -65,8 +43,7 @@ export function LoginForm() {
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)}>
             <CardHeader>
-              <CardTitle>Login into your account</CardTitle>
-              <CardDescription>Lily dental clinic</CardDescription>
+              <CardTitle>Forget Password</CardTitle>
             </CardHeader>
             <CardContent className="space-y-3">
               <InputForm
@@ -74,14 +51,6 @@ export function LoginForm() {
                 label={"Email"}
                 placeholder={"Enter your email"}
                 name={"email"}
-              />
-
-              <InputForm
-                control={form.control}
-                label={"Password"}
-                placeholder={"Enter your password"}
-                name={"password"}
-                type="password"
               />
             </CardContent>
 
@@ -96,18 +65,11 @@ export function LoginForm() {
             )}
 
             <div className="flex flex-col justify-end px-6 py-3">
-              <Button disabled={login.isPending} className="flex items-center">
-                {login.isPending ? <Loading /> : "Login"}
-              </Button>
-            </div>
-
-            <div className="flex justify-end items-center px-3 gap-2">
               <Button
-                variant="link"
-                type="button"
-                onClick={() => navigate("/forgot-password")}
+                disabled={forgot_password.isPending}
+                className="flex items-center"
               >
-                Forget Password?
+                {forgot_password.isPending ? <Loading /> : "Forget Password"}
               </Button>
             </div>
 

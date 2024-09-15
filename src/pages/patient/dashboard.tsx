@@ -8,12 +8,14 @@ const PatientDashboard = () => {
     <div>
       <DashboardHeader name={"Naol"} />
 
-      <div className="mx-6">
-        <h1 className="font-bold text-lg">Upcoming appointment</h1>
+      <div className="mx-8">
+        <h1 className="font-bold text-lg ">Upcoming appointment</h1>
         <PatientAppointmentDashboard />
       </div>
-
-      <PatientDashboardDoctors />
+      <div>
+        <h1 className="font-bold text-lg mx-8">Our Doctors</h1>
+        <PatientDashboardDoctors />
+      </div>
 
       <div className="border space-y-6 rounded-md p-6 shadow-sm mx-6">
         <h1>Treatment History </h1>

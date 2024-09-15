@@ -7,6 +7,7 @@ import DoctorDoctors from "@/pages/doctor/doctors";
 import EditProfileDoctor from "@/pages/doctor/edit-profile";
 import DoctorPatient from "@/pages/doctor/patient";
 import DoctorProfile from "@/pages/doctor/profile";
+import ForgotPassword from "@/pages/forget-password/ForgotPassword";
 import LandingPage from "@/pages/landing/Landing";
 import PatientAppointment from "@/pages/patient/appointment";
 import PatientDashboard from "@/pages/patient/dashboard";
@@ -35,6 +36,10 @@ export const router = createBrowserRouter([
   {
     path: "/login",
     element: <LoginScreen />,
+  },
+  {
+    path: "/forgot-password",
+    element: <ForgotPassword />,
   },
   {
     path: "/register",

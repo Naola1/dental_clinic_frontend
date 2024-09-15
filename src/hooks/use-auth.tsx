@@ -1,4 +1,4 @@
-import { login, register } from "@/api/auth";
+import { forgotPassword, login, register } from "@/api/auth";
 import { useMutation } from "@tanstack/react-query";
 import { toast } from "./use-toast";
 import useAuthStore from "./zustand/use-auth-store";
@@ -62,5 +62,11 @@ export const useDocAddRecord = () => {
         title: "Record added Successful",
       });
     },
+  });
+};
+
+export const useForgotPassword = () => {
+  return useMutation({
+    mutationFn: forgotPassword,
   });
 };

@@ -9,6 +9,12 @@ export const LoginSchema = z.object({
   }),
 });
 
+export const ForgotPasswordSchema = z.object({
+  email: z.string().email({
+    message: "Enter valid email address",
+  }),
+});
+
 export const RegisterSchema = z
   .object({
     email: z.string({
