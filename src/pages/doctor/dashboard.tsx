@@ -5,7 +5,7 @@ import DashboardHeader from "@/components/header/dashboard-header";
 const DoctorDashboard = () => {
   return (
     <div>
-      <DashboardHeader name={"Dr. Naol"} />
+      <DashboardHeader name={""} />
       <h1 className="py-4 text-xl font-bold px-6">Your Appointment</h1>
 
       <DoctorAppointmentTable showSearch={false} />

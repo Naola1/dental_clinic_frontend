@@ -6,7 +6,7 @@ import { PatientTreatmentTable } from "@/components/treatment/patient-treatment-
 const PatientDashboard = () => {
   return (
     <div>
-      <DashboardHeader name={"Naol"} />
+      <DashboardHeader name={""} />
 
       <div className="mx-8">
         <h1 className="font-bold text-lg ">Upcoming appointment</h1>
