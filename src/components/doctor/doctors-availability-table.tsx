@@ -26,12 +26,14 @@ import Loading from "../loading/Loading";
 import { DialogComponent } from "../dialog";
 import { BookingForm } from "./BookingForm";
 
+// Type definition for Doctor Availability data
 export type DoctorAvailability = {
   id: number;
   name: string;
   speciality: string;
 };
 
+// Column definitions for the doctors table
 export const columns: ColumnDef<DoctorAvailability>[] = [
   {
     accessorKey: "name",
@@ -61,7 +63,7 @@ export const columns: ColumnDef<DoctorAvailability>[] = [
     },
   },
 ];
-
+// DoctorsAvailablityTable Component
 export function DoctorsAvailablityTable() {
   const [sorting, setSorting] = React.useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
@@ -72,7 +74,7 @@ export function DoctorsAvailablityTable() {
   const [rowSelection, setRowSelection] = React.useState({});
 
   const { data: doctors, isPending } = useAllDoctors();
-
+  // Prepare data for the table
   const data: DoctorAvailability[] =
     doctors?.results.map((doc) => {
       return {
@@ -81,7 +83,7 @@ export function DoctorsAvailablityTable() {
         speciality: doc.specialization,
       };
     }) ?? [];
-
+  // Setup for React Table
   const table = useReactTable({
     data,
     columns,
@@ -100,7 +102,7 @@ export function DoctorsAvailablityTable() {
       rowSelection,
     },
   });
-
+  // Show loading indicator while data is being fetched
   if (isPending) {
     return <Loading />;
   }

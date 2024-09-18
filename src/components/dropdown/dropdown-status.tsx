@@ -9,11 +9,13 @@ import {
 } from "@/components/ui/select";
 import { useChangeStatus } from "@/hooks/use-doctor";
 
+// Props for the SelectStatus component
 interface SelectStatusProps {
   placeholder: string;
   appointmentId: number;
 }
 
+// SelectStatus Component
 export function SelectStatus({
   placeholder,
   appointmentId,

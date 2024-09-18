@@ -15,15 +15,18 @@ import { toast } from "@/hooks/use-toast";
 import { AxiosError } from "axios";
 import { useNavigate } from "react-router-dom";
 
+// Interface for booking form props
 interface BookingFormSchema {
   id: number;
   doctorName: string;
 }
 
+// Booking Form Component
 export function BookingForm({ id, doctorName }: BookingFormSchema) {
   const [error, setError] = useState<string | undefined>(undefined);
   const navigate = useNavigate();
 
+  // Form setup with validation
   const form = useForm<z.infer<typeof BookingSchema>>({
     resolver: zodResolver(BookingSchema),
     defaultValues: {
@@ -33,7 +36,7 @@ export function BookingForm({ id, doctorName }: BookingFormSchema) {
 
   const { data, isLoading } = usePDA(id);
   const book = useBooking();
-
+  // Function to handle form submission
   async function onSubmit(data: z.infer<typeof BookingSchema>) {
     setError(undefined);
     await book.mutateAsync({
@@ -45,7 +48,7 @@ export function BookingForm({ id, doctorName }: BookingFormSchema) {
       },
     });
   }
-
+  // Effect to handle booking results and errors
   useEffect(() => {
     if (book.isError) {
       if (book.error instanceof AxiosError)
@@ -59,7 +62,7 @@ export function BookingForm({ id, doctorName }: BookingFormSchema) {
       navigate(0);
     }
   }, [book.error, book.isSuccess]);
-
+  // Show loading indicator while fetching data
   if (isLoading) {
     return (
       <div className="flex justify-center p-4">

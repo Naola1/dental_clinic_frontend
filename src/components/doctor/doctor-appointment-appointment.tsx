@@ -32,6 +32,7 @@ import { Input } from "../ui/input";
 import { useDebouncedCallback } from "use-debounce";
 import { SelectStatus } from "../dropdown/dropdown-status";
 
+// Type definition for Doctor Availability data
 export type DoctorAvailability = {
   id: number;
   patient: string;
@@ -41,6 +42,7 @@ export type DoctorAvailability = {
   patientId: number;
 };
 
+// Column definitions for the table
 export const columns: ColumnDef<DoctorAvailability>[] = [
   {
     accessorKey: "patient",
@@ -93,10 +95,12 @@ export const columns: ColumnDef<DoctorAvailability>[] = [
   },
 ];
 
+// Props for the DoctorAppointmentAppointmentTable component
 interface DoctorAppointmentAppointmentTableProps {
   page_size?: string;
 }
 
+// DoctorAppointmentAppointmentTable Component
 export function DoctorAppointmentAppointmentTable({
   page_size,
 }: DoctorAppointmentAppointmentTableProps) {
@@ -113,7 +117,7 @@ export function DoctorAppointmentAppointmentTable({
 
   const { data: searchData, isPending: searchPendig } =
     useSearchAppointment(searchItem);
-
+  // Debounced input change handler for searching
   const handleInputChange = useDebouncedCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => {
       console.log("asd");
@@ -122,7 +126,7 @@ export function DoctorAppointmentAppointmentTable({
     },
     700
   );
-
+  // Prepare data for the table
   const data: DoctorAvailability[] =
     searchData && searchData.length > 0
       ? searchData?.map((search) => {
@@ -153,7 +157,7 @@ export function DoctorAppointmentAppointmentTable({
             patientId: doc.patient.id,
           };
         }) ?? [];
-
+  // React Table setup
   const table = useReactTable({
     data,
     columns,
@@ -172,7 +176,7 @@ export function DoctorAppointmentAppointmentTable({
       rowSelection,
     },
   });
-
+  // Show loading indicator while fetching data
   if (isPending) {
     return (
       <div className="flex items-center py-10 justify-center">
@@ -180,7 +184,7 @@ export function DoctorAppointmentAppointmentTable({
       </div>
     );
   }
-
+  // Show message if there are no appointments
   if (data.length === 0) {
     return (
       <p className="text-center">You don&apos;t have any appointments yet :)</p>

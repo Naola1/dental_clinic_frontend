@@ -9,6 +9,7 @@ import {
 } from "@/components/ui/dialog";
 import { ReactNode } from "react";
 
+// Props for the DialogComponent
 interface DialogComponenetProps {
   btnName?: string;
   title: string;
@@ -16,6 +17,7 @@ interface DialogComponenetProps {
   iconButton?: ReactNode;
 }
 
+// DialogComponent to display a dialog with optional button and content
 export function DialogComponent({
   btnName,
   title,

@@ -13,10 +13,11 @@ import Loading from "../loading/Loading";
 import { useEffect, useState } from "react";
 import { AlertMessage } from "../alert/Alert";
 
+// Forgot Password Form Component
 export function ForgotPasswordForm() {
   const navigate = useNavigate();
   const [error, setError] = useState(undefined);
-
+  // Form setup with validation
   const form = useForm<z.infer<typeof ForgotPasswordSchema>>({
     resolver: zodResolver(ForgotPasswordSchema),
     defaultValues: {
@@ -25,15 +26,15 @@ export function ForgotPasswordForm() {
   });
 
   const forgot_password = useForgotPassword();
-
+  // Function to handle form submission
   async function onSubmit(data: z.infer<typeof ForgotPasswordSchema>) {
     setError(undefined);
     await forgot_password.mutateAsync(data);
   }
-
+  // Effect to navigate on successful password reset
   useEffect(() => {
     if (forgot_password.data?.status === "OK") {
-      navigate("/login");
+      navigate("/login");// Redirect to login
     }
   }, [forgot_password.error, forgot_password.data]);
 

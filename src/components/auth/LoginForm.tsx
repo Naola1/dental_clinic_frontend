@@ -1,11 +1,11 @@
-import { Button } from "@/components/ui/button";
+import { Button } from "@/components/ui/button"; // Button component
 import {
   Card,
   CardContent,
   CardDescription,
   CardHeader,
   CardTitle,
-} from "@/components/ui/card";
+} from "@/components/ui/card";// Card components
 
 import { LoginSchema } from "@/schema/auth";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -20,10 +20,11 @@ import { useEffect, useState } from "react";
 import { AxiosError } from "axios";
 import { AlertMessage } from "../alert/Alert";
 
+// Login Form Component
 export function LoginForm() {
   const navigate = useNavigate();
   const [error, setError] = useState(undefined);
-
+  // Form setup with validation
   const form = useForm<z.infer<typeof LoginSchema>>({
     resolver: zodResolver(LoginSchema),
     defaultValues: {
@@ -32,20 +33,20 @@ export function LoginForm() {
     },
   });
 
-  const login = useLogin();
-
+  const login = useLogin(); // Hook for handling login
+  // Function to handle form submission
   async function onSubmit(data: z.infer<typeof LoginSchema>) {
     setError(undefined);
     await login.mutateAsync(data);
   }
-
+  // Effect to handle login errors and navigation on success
   useEffect(() => {
     if (login.isError && login.error instanceof AxiosError) {
       if (login.error.response?.data?.error) {
         setError(login.error.response?.data?.error);
       }
     }
-
+    // Navigate based on user role after successful login
     if (login.data?.role === "patient") {
       navigate("/patient/dashboard");
     }

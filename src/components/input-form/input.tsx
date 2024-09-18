@@ -8,6 +8,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { Control, FieldValues, Path } from "react-hook-form";
 
+// Props for the InputForm component
 interface InputFormProps<TFormValues extends FieldValues> {
   control: Control<TFormValues> | undefined;
   label: string;
@@ -15,7 +16,7 @@ interface InputFormProps<TFormValues extends FieldValues> {
   name: Path<TFormValues>;
   type?: React.HTMLInputTypeAttribute | undefined;
 }
-
+// InputForm Component
 export const InputForm = <TFormValues extends FieldValues>({
   control,
   label,

@@ -4,20 +4,20 @@ import moment from "moment";
 
 const PatientAppointmentDashboard = () => {
   const { data, isLoading } = usePADashboard();
-
+  // Show loading spinner while data is being fetched
   if (isLoading)
     return (
       <div className="flex justify-center">
         <Loading />
       </div>
     );
-
+  // Check if there are no appointments
   if (data?.count === 0) {
     return (
       <p className="text-center py-4">You don&apos; have any appoinments yet</p>
     );
   }
-
+  // Get the most recent appointment
   const item = data?.results[data?.results.length - 1];
 
   return (

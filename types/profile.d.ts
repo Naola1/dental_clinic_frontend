@@ -1,3 +1,4 @@
+// Interface representing a patient's profile information
 export interface IPatientProfile {
   user: User;
   medical_history?: string;
@@ -9,6 +10,7 @@ export interface IPatientProfile {
   qualification?: string;
 }
 
+// Interface representing a user with personal details
 interface User {
   username: string;
   email: string;

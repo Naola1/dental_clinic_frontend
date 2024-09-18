@@ -13,10 +13,12 @@ import { useNavigate } from "react-router-dom";
 import { z } from "zod";
 import { SelectForm } from "../dropdown/treatment-list";
 
+// Props for the DocAddRecordForm component
 interface DocAddRecordFormProps {
   patient: number;
 }
 
+// DocAddRecordForm Component
 const DocAddRecordForm = ({ patient }: DocAddRecordFormProps) => {
   const navigate = useNavigate();
 
@@ -25,14 +27,14 @@ const DocAddRecordForm = ({ patient }: DocAddRecordFormProps) => {
   const addRecord = useDocAddRecord();
 
   const { data, isFetching } = useGetTreatments();
-
+  // Map treatments data to the required format for the dropdown
   const items = data?.results.map((item) => {
     return {
       value: item.id,
       key: item.name,
     };
   });
-
+  // Form setup with validation
   const form = useForm<z.infer<typeof DocAddRecord>>({
     resolver: zodResolver(DocAddRecord),
     defaultValues: {
@@ -42,18 +44,18 @@ const DocAddRecordForm = ({ patient }: DocAddRecordFormProps) => {
       description: "",
     },
   });
-
+  // Function to handle form submission
   async function onSubmit(data: z.infer<typeof DocAddRecord>) {
     setError(undefined);
     await addRecord.mutateAsync(data);
   }
-
+  // Effect to navigate upon successful record addition
   useEffect(() => {
     if (addRecord.isSuccess) {
       navigate("/doctor/patient-records");
     }
   }, [addRecord.isSuccess]);
-
+  // Show loading indicator while fetching treatments
   if (isFetching) {
     return (
       <div className="flex justify-center">

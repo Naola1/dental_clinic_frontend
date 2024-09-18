@@ -19,13 +19,14 @@ import { useEffect, useState } from "react";
 import { AlertMessage } from "../alert/Alert";
 import { AxiosError } from "axios";
 
+// Registration Form Component
 export function RegisterForm() {
   const navigate = useNavigate();
 
   const [error, setError] = useState(undefined);
 
   const register = useRegister();
-
+  // Form setup with validation
   const form = useForm<z.infer<typeof RegisterSchema>>({
     resolver: zodResolver(RegisterSchema),
     defaultValues: {
@@ -35,12 +36,12 @@ export function RegisterForm() {
       confirmPassword: "",
     },
   });
-
+  // Function to handle form submission
   async function onSubmit(data: z.infer<typeof RegisterSchema>) {
     setError(undefined);
     await register.mutateAsync(data);
   }
-
+  // Effect to handle registration errors and navigation on success
   useEffect(() => {
     if (register.isError && register.error instanceof AxiosError) {
       if (register.error.response?.data?.email) {

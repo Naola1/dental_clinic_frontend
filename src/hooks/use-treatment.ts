@@ -8,6 +8,11 @@ export const useTreatment = () => {
   });
 };
 
+/**
+ * Fetches the treatment records for a doctor
+ *
+ * @returns The doctor's treatment records
+ */
 export const useDoctorTreatment = () => {
   return useQuery({
     queryKey: ["doctor-treatment"],

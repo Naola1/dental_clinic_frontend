@@ -1,13 +1,15 @@
-import { AlertCircle } from "lucide-react";
+import { AlertCircle } from "lucide-react"; //Icon for alerts
 
-import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
+import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"; // Alert components
 
+// Props for the AlertMessage component
 interface AlertMessageProps {
   message: string;
   variant: "default" | "destructive" | null | undefined;
   header: string;
 }
 
+// Component to display an alert message
 export function AlertMessage({ message, variant, header }: AlertMessageProps) {
   return (
     <Alert variant={variant}>

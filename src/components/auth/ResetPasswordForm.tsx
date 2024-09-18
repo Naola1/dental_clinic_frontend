@@ -14,13 +14,14 @@ import { useEffect, useState } from "react";
 import { AlertMessage } from "../alert/Alert";
 import { AxiosError } from "axios";
 
+// Reset Password Form Component
 export function ResetPasswordForm() {
   const navigate = useNavigate();
   const [error, setError] = useState(undefined);
   const [searchParams] = useSearchParams();
 
   const token = searchParams.get("token");
-
+  // Form setup with validation
   const form = useForm<z.infer<typeof ResetPasswordSchema>>({
     resolver: zodResolver(ResetPasswordSchema),
     defaultValues: {
@@ -31,7 +32,7 @@ export function ResetPasswordForm() {
   });
 
   const reset_password = useResetPassword();
-
+  // Function to handle form submission
   async function onSubmit(data: z.infer<typeof ResetPasswordSchema>) {
     setError(undefined);
     await reset_password.mutateAsync({
@@ -39,10 +40,10 @@ export function ResetPasswordForm() {
       password: data.password,
     });
   }
-
+  // Effect to handle navigation and errors after submission
   useEffect(() => {
     if (reset_password.data?.status === "OK") {
-      navigate("/login");
+      navigate("/login");// Redirect on successful reset
     }
     if (reset_password.isError) {
       if (reset_password.error instanceof AxiosError) {

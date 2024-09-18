@@ -25,6 +25,7 @@ import {
 import Loading from "../loading/Loading";
 import { useTreatment } from "@/hooks/use-treatment";
 
+// Type for Doctor Availability data
 export type DoctorAvailability = {
   id: number;
   date: string;
@@ -33,6 +34,7 @@ export type DoctorAvailability = {
   description: string;
 };
 
+// Column definitions for the table
 export const columns: ColumnDef<DoctorAvailability>[] = [
   {
     accessorKey: "date",
@@ -62,7 +64,9 @@ export const columns: ColumnDef<DoctorAvailability>[] = [
   },
 ];
 
+// Main component for displaying the treatment table
 export function PatientTreatmentTable() {
+  // State management for sorting, filtering, and visibility
   const [sorting, setSorting] = React.useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
     []
@@ -72,7 +76,7 @@ export function PatientTreatmentTable() {
   const [rowSelection, setRowSelection] = React.useState({});
 
   const { data: doctors, isPending } = useTreatment();
-
+  // Transforming fetched data into the required format for the table
   const data: DoctorAvailability[] =
     doctors?.results.map((doc) => {
       return {
@@ -83,7 +87,7 @@ export function PatientTreatmentTable() {
         description: doc.description,
       };
     }) ?? [];
-
+  // Setting up the table instance with React Table
   const table = useReactTable({
     data,
     columns,

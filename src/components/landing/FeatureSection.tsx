@@ -14,7 +14,7 @@ import {
   CalendarClock,
   ListTodo,
 } from "lucide-react";
-
+// Defining features with title, description, and associated icon
 const features = [
   {
     title: "Patient Account Management",
@@ -47,7 +47,7 @@ const features = [
     icon: ListTodo,
   },
 ];
-
+// AnimatedFeatures Component
 export default function AnimatedFeatures() {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
 

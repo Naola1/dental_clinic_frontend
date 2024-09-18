@@ -3,6 +3,7 @@ interface DashboardHeaderProps {
   showWelcome?: boolean;
 }
 
+// DashboardHeader Component
 const DashboardHeader = ({
   name,
   showWelcome = true,

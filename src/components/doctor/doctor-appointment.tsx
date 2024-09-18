@@ -25,7 +25,7 @@ import { useDADashboard, useSearchAppointment } from "@/hooks/use-patient";
 import moment from "moment";
 import { Input } from "../ui/input";
 import { useDebouncedCallback } from "use-debounce";
-
+// Type definition for Doctor Availability data
 export type DoctorAvailability = {
   id: number;
   patient: string;
@@ -33,7 +33,7 @@ export type DoctorAvailability = {
   appointment_date: string;
   status: string;
 };
-
+// Column definitions for the table
 export const columns: ColumnDef<DoctorAvailability>[] = [
   {
     accessorKey: "patient",
@@ -66,11 +66,12 @@ export const columns: ColumnDef<DoctorAvailability>[] = [
     ),
   },
 ];
-
+// Props for the DoctorAppointmentTable component
 interface DoctorAppointmentTablePops {
   showSearch?: boolean;
 }
 
+// DoctorAppointmentTable Component
 export function DoctorAppointmentTable({
   showSearch = true,
 }: DoctorAppointmentTablePops) {
@@ -82,7 +83,7 @@ export function DoctorAppointmentTable({
     React.useState<VisibilityState>({});
   const [rowSelection, setRowSelection] = React.useState({});
   const [searchItem, setSearchItem] = React.useState("");
-
+  // Debounced input change handler for searching appointments
   const handleInputChange = useDebouncedCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => {
       console.log("asd");
@@ -96,7 +97,7 @@ export function DoctorAppointmentTable({
 
   const { data: searchData, isPending: searchPendig } =
     useSearchAppointment(searchItem);
-
+  // Prepare data for the table
   const data: DoctorAvailability[] =
     searchData && searchData.length > 0
       ? searchData?.map((search) => {
@@ -125,7 +126,7 @@ export function DoctorAppointmentTable({
               doc.doctor.user.first_name + " " + doc.doctor.user.last_name,
           };
         }) ?? [];
-
+  // React Table setup
   const table = useReactTable({
     data,
     columns,
@@ -144,7 +145,7 @@ export function DoctorAppointmentTable({
       rowSelection,
     },
   });
-
+  // Show loading indicator while fetching data
   if (isPending) {
     return (
       <div className="flex items-center py-10 justify-center">
@@ -152,7 +153,7 @@ export function DoctorAppointmentTable({
       </div>
     );
   }
-
+  // Show message if there are no appointments
   if (data.length === 0) {
     return (
       <p className="text-center">You don&apos;t have any appointments yet :)</p>

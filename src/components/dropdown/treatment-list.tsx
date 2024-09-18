@@ -16,11 +16,13 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 
+// Interface for items in the select dropdown
 interface IItem {
   key: string;
   value: number;
 }
 
+// Props for the SelectForm component
 interface SelectFormProps<TFormValues extends FieldValues> {
   control: Control<TFormValues> | undefined;
   label: string;
@@ -30,6 +32,7 @@ interface SelectFormProps<TFormValues extends FieldValues> {
   items: IItem[];
 }
 
+// SelectForm Component
 export const SelectForm = <TFormValues extends FieldValues>({
   control,
   name,

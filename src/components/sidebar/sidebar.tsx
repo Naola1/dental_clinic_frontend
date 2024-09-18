@@ -5,9 +5,9 @@ import { Outlet, useLocation, useNavigate } from "react-router-dom";
 import { SidebarItem } from "types/auth";
 
 interface SidebarProps {
-  items: SidebarItem[];
+  items: SidebarItem[]; // Props for the Sidebar component
 }
-
+// Sidebar Component
 export function Sidebar({ items }: SidebarProps) {
   const navigate = useNavigate();
   const location = useLocation();

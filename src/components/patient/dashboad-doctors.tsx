@@ -3,7 +3,7 @@ import Loading from "../loading/Loading";
 
 export const PatientDashboardDoctors = () => {
   const { data: doctors, isLoading } = useAllDoctors();
-
+  // Show loading spinner while data is being fetched
   if (isLoading) {
     return (
       <div className="flex justify-center py-6">

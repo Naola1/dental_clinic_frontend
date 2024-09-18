@@ -28,6 +28,7 @@ import { useSearchRecord } from "@/hooks/use-patient";
 import { useDebouncedCallback } from "use-debounce";
 import { Input } from "../ui/input";
 
+// Type definition for Doctor Availability data
 export type DoctorAvailability = {
   id: number;
   date: string;
@@ -35,6 +36,7 @@ export type DoctorAvailability = {
   description: string;
 };
 
+// Column definitions for the treatment table
 export const columns: ColumnDef<DoctorAvailability>[] = [
   {
     accessorKey: "date",
@@ -63,7 +65,7 @@ export const columns: ColumnDef<DoctorAvailability>[] = [
     ),
   },
 ];
-
+// DoctorTreatmentTable Component
 export function DoctorTreatmentTable() {
   const [sorting, setSorting] = React.useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
@@ -78,7 +80,7 @@ export function DoctorTreatmentTable() {
 
   const { data: searchData, isPending: searchPendig } =
     useSearchRecord(searchItem);
-
+  // Debounced input change handler for searching
   const handleInputChange = useDebouncedCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => {
       console.log("asd");
@@ -87,7 +89,7 @@ export function DoctorTreatmentTable() {
     },
     700
   );
-
+  // Prepare data for the table
   const data: DoctorAvailability[] =
     searchData && searchData.length > 0
       ? searchData.map((search) => {
@@ -108,7 +110,7 @@ export function DoctorTreatmentTable() {
             description: doc.description,
           };
         }) ?? [];
-
+  // React Table setup
   const table = useReactTable({
     data,
     columns,
@@ -127,7 +129,7 @@ export function DoctorTreatmentTable() {
       rowSelection,
     },
   });
-
+  // Show loading indicator while fetching data
   if (isPending) {
     return (
       <div className="flex items-center py-10 justify-center">
@@ -135,7 +137,7 @@ export function DoctorTreatmentTable() {
       </div>
     );
   }
-
+  // Show message if there are no treatment records
   if (data.length === 0) {
     return (
       <p className="text-center">
