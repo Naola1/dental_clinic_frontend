@@ -84,7 +84,6 @@ export const columns: ColumnDef<DoctorAvailability>[] = [
     header: "Actions",
     cell: ({ row }) => {
       const data = row.original;
-      console.log(data);
       return (
         <DialogComponent
           iconButton={<Edit />}
@@ -134,7 +133,7 @@ export function DoctorAppointmentAppointmentTable({
     searchItem.length > 0 && searchData && searchData.length > 0
       ? searchData?.map((search) => {
           return {
-            id: search.patient.id,
+            id: search.id,
             patient:
               search.patient.user.first_name +
               " " +
@@ -145,19 +144,19 @@ export function DoctorAppointmentAppointmentTable({
               search.doctor.user.first_name +
               " " +
               search.doctor.user.last_name,
-            patientId: search.patient.id,
+            patientId: search.patient.user.id,
           };
         })
       : doctors?.results.map((doc) => {
           return {
-            id: doc.patient.id,
+            id: doc.id,
             patient:
               doc.patient.user.first_name + " " + doc.patient.user.last_name,
             appointment_date: doc.appointment_date,
             status: doc.status,
             doctor:
               doc.doctor.user.first_name + " " + doc.doctor.user.last_name,
-            patientId: doc.patient.id,
+            patientId: doc.patient.user.id,
           };
         }) ?? [];
   // React Table setup
