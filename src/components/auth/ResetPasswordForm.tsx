@@ -43,11 +43,11 @@ export function ResetPasswordForm() {
   // Effect to handle navigation and errors after submission
   useEffect(() => {
     if (reset_password.data?.status === "OK") {
-      navigate("/login");// Redirect on successful reset
+      navigate("/login"); // Redirect on successful reset
     }
     if (reset_password.isError) {
       if (reset_password.error instanceof AxiosError) {
-        setError(reset_password.error.response?.data);
+        setError(reset_password.error.response?.data.detail);
       }
     }
   }, [reset_password.error, reset_password.data]);
