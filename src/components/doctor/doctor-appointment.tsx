@@ -98,7 +98,7 @@ export function DoctorAppointmentTable({
     useSearchAppointment(searchItem);
   // Prepare data for the table
   const data: DoctorAvailability[] =
-    searchData && searchData.length > 0
+    searchItem.length > 0 && searchData && searchData.length > 0
       ? searchData?.map((search) => {
           return {
             id: search.id,
