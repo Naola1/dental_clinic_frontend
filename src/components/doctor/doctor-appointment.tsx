@@ -86,7 +86,6 @@ export function DoctorAppointmentTable({
   // Debounced input change handler for searching appointments
   const handleInputChange = useDebouncedCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => {
-      console.log("asd");
       const searchTerm = e.target.value;
       setSearchItem(searchTerm);
     },

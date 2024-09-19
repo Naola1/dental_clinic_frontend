@@ -65,8 +65,15 @@ export const columns: ColumnDef<DoctorAvailability>[] = [
     ),
   },
 ];
+
+interface DoctorTreatmentTablePops {
+  showSearch?: boolean;
+  per_page?: string;
+}
 // DoctorTreatmentTable Component
-export function DoctorTreatmentTable() {
+export function DoctorTreatmentTable({
+  showSearch = true,
+}: DoctorTreatmentTablePops) {
   const [sorting, setSorting] = React.useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
     []
@@ -148,14 +155,16 @@ export function DoctorTreatmentTable() {
 
   return (
     <div className="w-full px-6">
-      <div className="max-w-sm my-4">
-        <Input
-          placeholder="Search..."
-          type="text"
-          defaultValue={searchItem}
-          onChange={handleInputChange}
-        />
-      </div>
+      {showSearch && (
+        <div className="max-w-sm my-4">
+          <Input
+            placeholder="Search..."
+            type="text"
+            defaultValue={searchItem}
+            onChange={handleInputChange}
+          />
+        </div>
+      )}
       {searchPendig ? (
         <div className="flex items-center py-10 justify-center">
           <Loading />

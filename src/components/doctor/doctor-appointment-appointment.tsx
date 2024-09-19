@@ -84,6 +84,7 @@ export const columns: ColumnDef<DoctorAvailability>[] = [
     header: "Actions",
     cell: ({ row }) => {
       const data = row.original;
+      console.log(data);
       return (
         <DialogComponent
           iconButton={<Edit />}
@@ -98,11 +99,13 @@ export const columns: ColumnDef<DoctorAvailability>[] = [
 // Props for the DoctorAppointmentAppointmentTable component
 interface DoctorAppointmentAppointmentTableProps {
   page_size?: string;
+  showSearch?: boolean;
 }
 
 // DoctorAppointmentAppointmentTable Component
 export function DoctorAppointmentAppointmentTable({
   page_size,
+  showSearch = true,
 }: DoctorAppointmentAppointmentTableProps) {
   const [sorting, setSorting] = React.useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
@@ -120,18 +123,18 @@ export function DoctorAppointmentAppointmentTable({
   // Debounced input change handler for searching
   const handleInputChange = useDebouncedCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => {
-      console.log("asd");
       const searchTerm = e.target.value;
       setSearchItem(searchTerm);
     },
     700
   );
+
   // Prepare data for the table
   const data: DoctorAvailability[] =
-    searchData && searchData.length > 0
+    searchItem.length > 0 && searchData && searchData.length > 0
       ? searchData?.map((search) => {
           return {
-            id: search.id,
+            id: search.patient.id,
             patient:
               search.patient.user.first_name +
               " " +
@@ -147,7 +150,7 @@ export function DoctorAppointmentAppointmentTable({
         })
       : doctors?.results.map((doc) => {
           return {
-            id: doc.id,
+            id: doc.patient.id,
             patient:
               doc.patient.user.first_name + " " + doc.patient.user.last_name,
             appointment_date: doc.appointment_date,
@@ -193,14 +196,16 @@ export function DoctorAppointmentAppointmentTable({
 
   return (
     <div className="w-full px-6">
-      <div className="max-w-sm my-4">
-        <Input
-          placeholder="Search..."
-          type="text"
-          defaultValue={searchItem}
-          onChange={handleInputChange}
-        />
-      </div>
+      {showSearch && (
+        <div className="max-w-sm my-4">
+          <Input
+            placeholder="Search..."
+            type="text"
+            defaultValue={searchItem}
+            onChange={handleInputChange}
+          />
+        </div>
+      )}
       {searchPendig ? (
         <div className="flex items-center py-10 justify-center">
           <Loading />

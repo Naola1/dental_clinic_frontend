@@ -31,9 +31,10 @@ const PatientAppointmentDashboard = () => {
         <div>
           <p className="font-bold">Doctor</p>
           <p>
-            {item?.doctor.user.first_name +
+            {"Dr. " +
+              item?.doctor.user.first_name +
               " " +
-              item?.doctor.user.first_name || "-"}
+              item?.doctor.user.last_name || "-"}
           </p>
         </div>
         <div>

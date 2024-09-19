@@ -11,7 +11,7 @@ const DoctorDashboard = () => {
       <DoctorAppointmentTable showSearch={false} />
 
       <h1 className="py-4 text-xl font-bold px-6">Recent Patient Record</h1>
-      <DoctorTreatmentTable />
+      <DoctorTreatmentTable showSearch={false} />
     </div>
   );
 };
